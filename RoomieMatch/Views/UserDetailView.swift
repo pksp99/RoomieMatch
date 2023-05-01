@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UserDetailView: View {
+    var user: User
     var body: some View {
         
         ZStack {
@@ -24,6 +25,6 @@ struct UserDetailView: View {
 
 struct UserDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        UserDetailView()
+        UserDetailView(user: dummyGetUserGroupsResponse.userGroups[0].users[0])
     }
 }

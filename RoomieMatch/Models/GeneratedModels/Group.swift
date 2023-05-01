@@ -12,12 +12,12 @@ import Foundation
 public struct Group: Codable {
 
     /** Unique group ID. */
-    public var groupId: String?
+    public var groupId: String
     public var groupInfo: String?
-    public var userCount: Int?
-    public var userIds: [String]?
+    public var userCount: Int
+    public var userIds: [String]
 
-    public init(groupId: String? = nil, groupInfo: String? = nil, userCount: Int? = nil, userIds: [String]? = nil) {
+    public init(groupId: String, groupInfo: String? = nil, userCount: Int, userIds: [String]) {
         self.groupId = groupId
         self.groupInfo = groupInfo
         self.userCount = userCount

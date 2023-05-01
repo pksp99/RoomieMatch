@@ -1,0 +1,247 @@
+{
+    "userGroups": [
+        {
+            "groupId": "GR1234567890",
+            "group_info": "This group is for students at XYZ University",
+            "user_count": 3,
+            "user_ids": [
+                "US1234567890",
+                "US2345678901",
+                "US3456789012"
+            ],
+            "users": [
+                {
+                    "userId": "US1234567890",
+                    "email": "jane@example.com",
+                    "groupId": "GR1234567890",
+                    "user_attributes": {
+                        "name": "Jane Doe",
+                        "intro": "Hi, I'm Jane and I'm looking for a roommate",
+                        "profile_image": "https://roomiematch/images/jane.jpg",
+                        "gender": "female",
+                        "age": 20,
+                        "monthly_budget": 1000,
+                        "major": "Computer Science",
+                        "date_available": "2023-08-01",
+                        "food_preference": "Vegan",
+                        "cover_images": [
+                            {
+                                "image_url": "https://roomiematch/images/jane_cover.jpg"
+                            }
+                        ],
+                        "bio": "I'm a clean, responsible, and friendly person",
+                        "hobbies": [
+                            "Reading",
+                            "Watching movies"
+                        ],
+                        "cleanliness": 5,
+                        "sleep_schedule": "early_bird",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    },
+                    "preferred_attributes": {
+                        "gender": "female",
+                        "hobbies": [
+                            "Reading"
+                        ],
+                        "food_preference": "Vegan",
+                        "cleanliness": 5,
+                        "sleep_schedule": "early_bird",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    }
+                },
+                {
+                    "userId": "US2345678901",
+                    "email": "john@example.com",
+                    "groupId": "GR1234567890",
+                    "user_attributes": {
+                        "name": "John Smith",
+                        "intro": "Hi, I'm John and I'm looking for a roommate",
+                        "profile_image": "https://roomiematch/images/john.jpg",
+                        "gender": "male",
+                        "age": 22,
+                        "monthly_budget": 1200,
+                        "major": "Psychology",
+                        "date_available": "2023-08-01",
+                        "food_preference": "Vegetarian",
+                        "cover_images": [
+                            {
+                                "image_url": "https://roomiematch/images/john_cover.jpg"
+                            }
+                        ],
+                        "bio": "I'm an easy-going, clean, and respectful person",
+                        "hobbies": [
+                            "Playing guitar",
+                            "Going to the gym"
+                        ],
+                        "cleanliness": 4,
+                        "sleep_schedule": "night_owl",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": true
+                    },
+                    "preferred_attributes": {
+                        "gender": "male",
+                        "hobbies": [
+                            "Playing guitar"
+                        ],
+                        "food_preference": "No Preference",
+                        "cleanliness": 4,
+                        "sleep_schedule": "night_owl",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": true
+                    }
+                },
+                {
+                    "userId": "US3456789012",
+                    "email": "mary@example.com",
+                    "groupId": "GR1234567890",
+                    "user_attributes": {
+                        "name": "Mary Johnson",
+                        "intro": "Hey, I'm Mary and I'm looking for a roommate",
+                        "profile_image": "https://roomiematch/images/mary.jpg",
+                        "gender": "female",
+                        "age": 21,
+                        "monthly_budget": 800,
+                        "major": "Physics",
+                        "date_available": "2023-08-01",
+                        "food_preference": "No Preference",
+                        "cover_images": [
+                            {
+                                "image_url": "https://roomiematch/images/mary_cover.jpg"
+                            }
+                        ],
+                        "bio": "I'm a quiet, clean, and respectful person",
+                        "hobbies": [
+                            "Reading",
+                            "Writing"
+                        ],
+                        "cleanliness": 5,
+                        "sleep_schedule": "early_bird",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    },
+                    "preferred_attributes": {
+                        "gender": "female",
+                        "hobbies": [
+                            "Reading",
+                            "Writing"
+                        ],
+                        "food_preference": "No Preference",
+                        "cleanliness": 5,
+                        "sleep_schedule": "early_bird",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    }
+                }
+            ]
+        },
+        
+        
+        {
+            "groupId": "GRXXXXXXXXXXXXXXXXXXX",
+            "group_info": "string",
+            "user_count": 2,
+            "user_ids": [
+                "USXXXXXXXXXXXXXXXXXXX",
+                "USXXXXXXXXXXXXXXXXXXX"
+            ],
+            "users": [
+                {
+                    "userId": "USXXXXXXXXXXXXXXXXXXX",
+                    "email": "user1@example.com",
+                    "groupId": "GRXXXXXXXXXXXXXXXXXXX",
+                    "user_attributes": {
+                        "name": "Adam Smith",
+                        "intro": "Hey, I'm Adam and I'm looking for a roommate",
+                        "profile_image": "https://roomiematch/images/adam.jpg",
+                        "gender": "male",
+                        "age": 25,
+                        "monthly_budget": 1200,
+                        "major": "Computer Science",
+                        "date_available": "2023-06-01",
+                        "food_preference": "Vegan",
+                        "cover_images": [
+                            {
+                                "image_url": "https://roomiematch/images/adam_cover.jpg"
+                            }
+                        ],
+                        "bio": "I'm a quiet and responsible person",
+                        "hobbies": [
+                            "Gaming",
+                            "Reading"
+                        ],
+                        "cleanliness": 4,
+                        "sleep_schedule": "night_owl",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    },
+                    "preferred_attributes": {
+                        "gender": "female",
+                        "hobbies": [
+                            "Reading"
+                        ],
+                        "food_preference": "Vegan",
+                        "cleanliness": 5,
+                        "sleep_schedule": "night_owl",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    }
+                },
+                {
+                    "userId": "USXXXXXXXXXXXXXXXXXXX",
+                    "email": "user2@example.com",
+                    "groupId": "GRXXXXXXXXXXXXXXXXXXX",
+                    "user_attributes": {
+                        "name": "Sarah Lee",
+                        "intro": "Hi, I'm Sarah and I'm looking for a roommate",
+                        "profile_image": "https://roomiematch/images/sarah.jpg",
+                        "gender": "female",
+                        "age": 21,
+                        "monthly_budget": 800,
+                        "major": "Biology",
+                        "date_available": "2023-06-01",
+                        "food_preference": "Vegetarian",
+                        "cover_images": [
+                            {
+                                "image_url": "https://roomiematch/images/sarah_cover.jpg"
+                            }
+                        ],
+                        "bio": "I'm a quiet, clean, and friendly person",
+                        "hobbies": [
+                            "Cooking",
+                            "Yoga"
+                        ],
+                        "cleanliness": 5,
+                        "sleep_schedule": "early_bird",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    },
+                    "preferred_attributes": {
+                        "gender": "male",
+                        "hobbies": [
+                            "Gaming"
+                        ],
+                        "food_preference": "Vegetarian",
+                        "cleanliness": 5,
+                        "sleep_schedule": "early_bird",
+                        "smoking": false,
+                        "partying": false,
+                        "pet_friendly": false
+                    }
+                }
+            ]
+        }
+        
+    ]
+}
+

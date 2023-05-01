@@ -51,33 +51,33 @@ public struct UserAttributes: Codable {
         case somewhereInBetween = "somewhere_in_between"
     }
     /** Name of the User */
-    public var name: String?
+    public var name: String
     /** A single line of intro for the user. */
-    public var intro: String?
+    public var intro: String
     /** Link for user&#x27;s profile Image. */
-    public var profileImage: String?
+    public var profileImage: String
     /** User&#x27;s gender */
-    public var gender: Gender?
+    public var gender: Gender
     /** User&#x27;s age */
     public var age: Int?
     /** Monthly budget of the user. */
-    public var monthlyBudget: Int?
+    public var monthlyBudget: Int
     /** User&#x27;s major or field of study */
-    public var major: Major?
+    public var major: Major
     /** Date of availability */
-    public var dateAvailable: Date?
+    public var dateAvailable: String
     /** User&#x27;s food preference */
     public var foodPreference: FoodPreference?
     /** Link for user&#x27;s cover images. */
-    public var coverImages: [UserAttributesCoverImages]?
+    public var coverImages: [UserAttributesCoverImages]
     /** User&#x27;s bio or description */
     public var bio: String?
     /** User&#x27;s hobbies or interests */
     public var hobbies: [String]?
     /** User&#x27;s cleanliness rating (1&#x3D;very messy, 5&#x3D;very clean) */
-    public var cleanliness: Int?
+    public var cleanliness: Int
     /** User&#x27;s preferred sleep schedule */
-    public var sleepSchedule: SleepSchedule?
+    public var sleepSchedule: SleepSchedule
     /** Whether the user smokes or not */
     public var smoking: Bool?
     /** Whether the user likes to party or not */
@@ -85,7 +85,7 @@ public struct UserAttributes: Codable {
     /** Whether the user is okay with living with pets or not */
     public var petFriendly: Bool?
 
-    public init(name: String? = nil, intro: String? = nil, profileImage: String? = nil, gender: Gender? = nil, age: Int? = nil, monthlyBudget: Int? = nil, major: Major? = nil, dateAvailable: Date? = nil, foodPreference: FoodPreference? = nil, coverImages: [UserAttributesCoverImages]? = nil, bio: String? = nil, hobbies: [String]? = nil, cleanliness: Int? = nil, sleepSchedule: SleepSchedule? = nil, smoking: Bool? = nil, partying: Bool? = nil, petFriendly: Bool? = nil) {
+    public init(name: String, intro: String, profileImage: String, gender: Gender, age: Int? = nil, monthlyBudget: Int, major: Major, dateAvailable: String, foodPreference: FoodPreference? = nil, coverImages: [UserAttributesCoverImages], bio: String? = nil, hobbies: [String]? = nil, cleanliness: Int, sleepSchedule: SleepSchedule, smoking: Bool? = nil, partying: Bool? = nil, petFriendly: Bool? = nil) {
         self.name = name
         self.intro = intro
         self.profileImage = profileImage

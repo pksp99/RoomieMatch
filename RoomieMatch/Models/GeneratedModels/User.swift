@@ -11,14 +11,14 @@ import Foundation
 
 public struct User: Codable {
 
-    public var userId: String?
-    public var email: String?
+    public var userId: String
+    public var email: String
     /** If user has joined any group, it will represent it&#x27;s group id. */
-    public var groupId: String?
-    public var userAttributes: UserAttributes?
+    public var groupId: String
+    public var userAttributes: UserAttributes
     public var preferredAttributes: PreferredAttributes?
 
-    public init(userId: String? = nil, email: String? = nil, groupId: String? = nil, userAttributes: UserAttributes? = nil, preferredAttributes: PreferredAttributes? = nil) {
+    public init(userId: String, email: String, groupId: String, userAttributes: UserAttributes, preferredAttributes: PreferredAttributes? = nil) {
         self.userId = userId
         self.email = email
         self.groupId = groupId

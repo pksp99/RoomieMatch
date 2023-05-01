@@ -8,3 +8,4 @@
 import Foundation
 
 let BACKEND_API_URL = "editme.url"
+let USERS_ENDPOINT = "\(BACKEND_API_URL)/users"

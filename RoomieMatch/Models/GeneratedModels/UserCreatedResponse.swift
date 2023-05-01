@@ -12,14 +12,11 @@ import Foundation
 public struct UserCreatedResponse: Codable {
 
     /** ID of the user upon creation. */
-    public var _id: String?
+    public var userId: String
 
-    public init(_id: String? = nil) {
-        self._id = _id
+    public init(userId: String) {
+        self.userId = userId
     }
 
-    public enum CodingKeys: String, CodingKey { 
-        case _id = "id"
-    }
 
 }

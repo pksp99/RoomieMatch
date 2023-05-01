@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct UserCard: View {
-    @State var user: User?
+    @State var user: User
+    var id: Int
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color("BackgroundColor"))
                 .shadow(radius: 5)
-                .aspectRatio(14/15, contentMode: .fit)
+                .frame(width: 280, height: 280)
             
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
-                    Image("profileImage")
+                    Image("profileImage") //TODO change
                         .resizable()
                         .scaledToFill()
                         .frame(maxHeight: geometry.size.height/2.2)
@@ -27,19 +28,21 @@ struct UserCard: View {
                     
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("Free to Connect")
+                            Text("Free to Connect") // TODO change
                                 .font(.caption)
                                 .textCase(.uppercase)
+                                .foregroundColor(Color("AlmostBlackColor"))
                                 .padding(6.0)
                                 .background(
                                     RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.accentColor)
+                                        .fill(Color.accentColor.opacity(0.7))
                                         .frame(height: 20)
                                 )
                             Spacer()
-                            Text("Found a house")
+                            Text("Found a house") // TODO change
                                 .font(.caption)
                                 .textCase(.uppercase)
+                                .foregroundColor(Color("AlmostBlackColor"))
                                 .padding(6.0)
                                 .background(
                                     RoundedRectangle(cornerRadius: 5)
@@ -49,19 +52,22 @@ struct UserCard: View {
                         }
                         
                         
-                        Text("John Wick")
+                        Text(user.userAttributes.name)
                             .font(.title2)
                             .fontWeight(.bold)
+                            .foregroundColor(.black)
                         
                         
-                        Text("Some description")
-                            .font(.body)
+                        Text(user.userAttributes.intro)
+                            .font(.caption)
+                            .foregroundColor(.black)
+                            
 
                         HStack{
                             VStack(alignment: .leading){
                                 Text("Budget")
                                     .font(.subheadline)
-                                Text("$500")
+                                Text("$ \(user.userAttributes.monthlyBudget)")
                                     .foregroundColor(Color("DarkGray"))
                                 
                             }
@@ -69,12 +75,12 @@ struct UserCard: View {
                             VStack(alignment: .leading){
                                 Text("Course")
                                     .font(.subheadline)
-                                Text("Computer Scinece")
+                                Text(user.userAttributes.major.rawValue)
                                     .font(.caption)
                                     .foregroundColor(Color("DarkGray"))
                             }
                         }
-                        .padding(.vertical)
+                        .padding(.vertical, 3)
                         
                     }
                     .padding(.top, 4)
@@ -84,23 +90,21 @@ struct UserCard: View {
                 }
                 
             }
-            .aspectRatio(14/15, contentMode: .fit)
             .cornerRadius(10)
             
         }
-        .frame(maxWidth: 300)
-        .aspectRatio(14/15, contentMode: .fit)
+        .frame(width: 280, height: 280)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.accentColor, lineWidth: 1)
         )
-        .padding()
+        .id(id)
     }
 }
 
 
 struct UserCard_Previews: PreviewProvider {
     static var previews: some View {
-        UserCard()
+        UserCard(user: dummyGetUserGroupsResponse.userGroups[0].users[0], id: 0)
     }
 }

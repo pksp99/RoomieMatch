@@ -11,9 +11,9 @@ import Foundation
 
 public struct GetUserGroupsResponse: Codable {
 
-    public var userGroups: [UserGroup]?
+    public var userGroups: [UserGroup]
 
-    public init(userGroups: [UserGroup]? = nil) {
+    public init(userGroups: [UserGroup]) {
         self.userGroups = userGroups
     }
 

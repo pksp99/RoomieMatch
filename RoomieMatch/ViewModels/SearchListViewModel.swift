@@ -9,9 +9,18 @@ import Foundation
 
 
 class SearchListViewModel: ObservableObject {
-    static let userGroup = UserGroup(groupId: "10")
-    static let userGroup2 = UserGroup(groupId: "110")
-    @Published var userGroups: [UserGroup] = [userGroup, userGroup2]
+    
+    @Published var userGroups: [UserGroup] = dummyGetUserGroupsResponse.userGroups
     
     private var getUserGroupsResponse: GetUserGroupsResponse?
+    
+    func getUserGroups() {
+        let url = USERS_ENDPOINT
+        //Network call
+        NetworkRequester.shared.downloadJson(url: url, type: GetUserGroupsResponse.self) { result in
+            print("GetUserGroupsResponse JSON download and Decode successful")
+            self.getUserGroupsResponse = result
+            self.userGroups = self.getUserGroupsResponse!.userGroups
+        }
+    }
 }

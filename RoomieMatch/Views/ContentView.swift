@@ -9,11 +9,39 @@ import SwiftUI
 
 
 
-struct ContentView: View {
-    var body: some View {
-        Text("Hello World")
+// The appState used through the app for maintaing user info.
+class AppState: ObservableObject{
+    @Published var isOnboarded: Bool
+    
+    var userId: String?
+    var userName: String?
+    var profileImage: UIImage?
+    
+    init(isOnboarded: Bool) {
+        self.isOnboarded = isOnboarded
+    }
+    
+    init(isOnboarded: Bool, userId: String?, userName: String?, profileImage: UIImage?) {
+        self.isOnboarded = isOnboarded
+        self.userId = userId
+        self.userName = userName
+        self.profileImage = profileImage
     }
 }
+
+struct ContentView: View {
+    @ObservedObject var appState = AppState(isOnboarded: false)
+    var body: some View {
+        if appState.isOnboarded {
+            ContentMainView().environmentObject(appState)
+        }
+        else {
+            LoginView()
+                .environmentObject(appState)
+        }
+    }
+}
+
 
 
 

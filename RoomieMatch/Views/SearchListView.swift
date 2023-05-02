@@ -11,7 +11,7 @@ struct SearchListView: View {
     @ObservedObject var viewModel = SearchListViewModel()
     var body: some View {
         
-        NavigationView {
+//        NavigationView {
             ScrollView {
                 VStack {
                     ForEach(viewModel.userGroups, id: \.groupId) { group in
@@ -50,12 +50,13 @@ struct SearchListView: View {
             }
             .navigationTitle("Search")
             .background(Color("BackgroundColor"))
+            .onAppear() {
+                viewModel.getUserGroups()
+            }
 
         }
-        .onAppear() {
-            viewModel.getUserGroups()
-        }
-    }
+        
+//    }
 }
 
 struct SearchListView_Previews: PreviewProvider {

@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentMainView: View {
-   
+    @EnvironmentObject var appState: AppState
     var body: some View {
         NavigationView {
             TabView {
@@ -33,13 +34,61 @@ struct ContentMainView: View {
                         Text("Accounts")
                     }
             }
+            .navigationBarItems(
+                leading:
+                    Menu {
+                        Button(action: {
+                            // TODO
+                        }, label: {
+                            Label("Saved People", systemImage: "star.fill")
+                        })
+                    } label: {
+                        Image(systemName: "line.horizontal.3")
+                            .imageScale(.large)
+                    },
+                trailing:
+                    Menu {
+                        Button(action: {
+                           //TODO User can change account settings, for example changing passwords.
+                            
+                        }, label: {
+                            Label("Account Settings", systemImage: "gear")
+                        })
+                        
+                        Button(action: {
+                            signOut()
+                            
+                        }, label: {
+                            Label("Sign out", systemImage: "rectangle.portrait.and.arrow.right")
+                        })
+                    } label: {
+                        Image(systemName: "person.fill")
+                    }
+            )
 
         }
 
     }
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            appState.isOnboarded = false
+        } catch {
+            print("Error signing out: \(error.localizedDescription)")
+        }
+    }
 }
 struct ContentMainView_Previews: PreviewProvider {
+    
+    //Just for Preview
+    static func getAppState() -> AppState {
+        
+        let appState = AppState(isOnboarded: true, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"))
+        return appState
+
+    }
+    
     static var previews: some View {
-        ContentMainView()
+        ContentMainView().environmentObject(getAppState())
     }
 }

@@ -73,16 +73,29 @@ class AccountsViewModel: ObservableObject {
             pet_friedly = user.userAttributes.petFriendly ?? false
             
             let imageURLString = user.userAttributes.profileImage
-            let storageRef = Storage.storage().reference(forURL: imageURLString)
-            
-            storageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) -> Void in
-                if let error = error {
-                    print("Unable to get the image: \(error)")
+            if isFirebaseStorageURL(imageURLString) {
+                let storageRef = Storage.storage().reference(forURL: imageURLString)
+                
+                storageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) -> Void in
+                    if let error = error {
+                        print("Unable to get the image: \(error)")
+                    }
+                    self.profileImage = UIImage(data: data!)
                 }
-                self.profileImage = UIImage(data: data!)
+            }
+            else {
+                print("Invalid URL for FirebaseStorage: \(imageURLString)")
             }
         }
     }
+    private func isFirebaseStorageURL(_ url: String) -> Bool {
+        let gsRegex = #"^gs:\/\/([\w-]+\.appspot\.com)\/(.+)$"#
+        let httpsRegex = #"^https:\/\/firebasestorage\.googleapis\.com\/v\d\/b\/([\w-]+)\/o\/(.+)$"#
+        let gsMatch = url.range(of: gsRegex, options: .regularExpression)
+        let httpsMatch = url.range(of: httpsRegex, options: .regularExpression)
+        return (gsMatch != nil) || (httpsMatch != nil)
+    }
+
     
     
     func postUserDetail(userId: String, email: String) {

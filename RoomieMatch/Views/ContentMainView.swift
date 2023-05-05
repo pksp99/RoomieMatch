@@ -27,7 +27,7 @@ struct ContentMainView: View {
                             .renderingMode(.template)
                         Text("Messages")
                     }
-                Text("Third View")
+                AccountView()
                     .tabItem {
                         Image("ic-account")
                             .renderingMode(.template)

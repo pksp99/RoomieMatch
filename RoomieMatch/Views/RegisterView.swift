@@ -15,6 +15,8 @@ struct RegisterView: View {
     @State private var confirmPassword = ""
     @State private var error = ""
     
+    @State private var showAccountDetailView = false
+    
     @EnvironmentObject var appState: AppState
     
     var body: some View {
@@ -77,7 +79,9 @@ struct RegisterView: View {
                     
                 }
                 .navigationBarTitle("Register")
-               
+                .sheet(isPresented: $showAccountDetailView) {
+                    AccountView()
+                }
                 
             }
             .background(Color("BackgroundColor"))
@@ -91,8 +95,12 @@ struct RegisterView: View {
             if let error = error {
                 self.error = error.localizedDescription
             } else {
-                appState.isOnboarded = true
+//                appState.isOnboarded = true
                 // TODO add some logic here to get user data after registering
+                let userId = Auth.auth().currentUser?.uid
+                appState.userId = userId
+                appState.userEmail = email
+                showAccountDetailView = true
             }
         }
     }

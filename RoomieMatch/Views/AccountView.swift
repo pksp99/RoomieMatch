@@ -133,6 +133,9 @@ struct AccountView: View {
                 ImagePicker(selectedImage: $viewModel.profileImage)
                 
             }
+            .onAppear {
+                viewModel.getUserDetail(userId: appState.userId!)
+            }
             .background(Color("BackgroundColor"))
             .scrollContentBackground(.hidden)
             
@@ -178,7 +181,8 @@ struct AccountView: View {
                         Button(action: {
                             if (viewModel.validate()) {
                                 viewModel.postUserDetail(userId: appState.userId!, email: appState.userEmail!)
-                                
+                                appState.userName = viewModel.name
+                                appState.isOnboarded = true
                                 self.alertText = "Profile Updated"
                                 self.showingAlert = true
                             }
@@ -214,7 +218,7 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
     static func getAppState() -> AppState {
         
-        let appState = AppState(isOnboarded: false, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"), userEmail: "hey@gmail.com")
+        let appState = AppState(isOnboarded: true, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"), userEmail: "hey@gmail.com")
         return appState
         
     }

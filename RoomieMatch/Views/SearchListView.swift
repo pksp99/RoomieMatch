@@ -10,8 +10,10 @@ import SwiftUI
 struct SearchListView: View {
     @ObservedObject var viewModel = SearchListViewModel()
     var body: some View {
-        
-//        NavigationView {
+        if (viewModel.userGroups.count == 0) {
+            Text("No Roommates available")
+        }
+        else {
             ScrollView {
                 VStack {
                     ForEach(viewModel.userGroups, id: \.groupId) { group in
@@ -29,12 +31,27 @@ struct SearchListView: View {
                                             .stroke(Color.accentColor, lineWidth: 1)
                                     )
                                 HStack {
-                                    Button(action: {}, label: {
-                                        Label("Save", image: "ic-save-star")
-                                    })
-                                    .padding(.horizontal)
+                                    if(viewModel.likedGroups.contains(group.groupId)) {
+                                        Button(action: {
+                                            viewModel.unLikeGroup(group: group)
+                                        }, label: {
+                                            Label("Unlike", systemImage: "heart.fill")
+                                        }).padding(.horizontal)
+                                    }
+                                    else {
+                                        Button(action: {
+                                            viewModel.likeGroup(group: group)
+                                        }, label: {
+                                            Label("Like", systemImage: "heart")
+                                        }).padding(.horizontal)
+                                    }
+                                    
                                     Spacer()
-                                    Button(action: {}, label: {
+                                    Button(action: {
+                                        withAnimation{
+                                            viewModel.dismissGroup(group: group)
+                                        }
+                                    }, label: {
                                         Label("Dismiss", image: "ic-dismiss")
                                     })
                                     .padding(.horizontal)
@@ -53,10 +70,9 @@ struct SearchListView: View {
             .onAppear() {
                 viewModel.getUserGroups()
             }
-
         }
         
-//    }
+    }
 }
 
 struct SearchListView_Previews: PreviewProvider {

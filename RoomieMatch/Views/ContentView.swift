@@ -16,16 +16,18 @@ class AppState: ObservableObject{
     var userId: String?
     var userName: String?
     var profileImage: UIImage?
+    var userEmail: String?
     
     init(isOnboarded: Bool) {
         self.isOnboarded = isOnboarded
     }
     
-    init(isOnboarded: Bool, userId: String?, userName: String?, profileImage: UIImage?) {
+    init(isOnboarded: Bool, userId: String?, userName: String?, profileImage: UIImage?, userEmail: String?) {
         self.isOnboarded = isOnboarded
         self.userId = userId
         self.userName = userName
         self.profileImage = profileImage
+        self.userEmail = userEmail
     }
 }
 

@@ -83,7 +83,7 @@ struct ContentMainView_Previews: PreviewProvider {
     //Just for Preview
     static func getAppState() -> AppState {
         
-        let appState = AppState(isOnboarded: true, userId: "123", userName: "Preet Karia", profileImage: UIImage(named: "defaultProfile"))
+        let appState = AppState(isOnboarded: true, userId: "123", userName: "Preet Karia", profileImage: UIImage(named: "defaultProfile"), userEmail: "hey@gmail.com")
         return appState
 
     }

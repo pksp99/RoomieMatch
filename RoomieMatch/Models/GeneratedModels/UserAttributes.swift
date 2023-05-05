@@ -11,12 +11,12 @@ import Foundation
 
 public struct UserAttributes: Codable {
 
-    public enum Gender: String, Codable { 
+    public enum Gender: String, Codable, CaseIterable { 
         case male = "male"
         case female = "female"
         case other = "other"
     }
-    public enum Major: String, Codable { 
+    public enum Major: String, Codable, CaseIterable { 
         case businessAdministration = "Business Administration"
         case computerScience = "Computer Science"
         case psychology = "Psychology"

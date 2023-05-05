@@ -106,7 +106,7 @@ struct LoginView_Previews: PreviewProvider {
     // Just for Preview
     static func getAppState() -> AppState {
         
-        let appState = AppState(isOnboarded: true, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"))
+        let appState = AppState(isOnboarded: true, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"), userEmail: "hey@gmail.com")
         return appState
 
     }

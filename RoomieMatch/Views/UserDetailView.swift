@@ -12,7 +12,6 @@ import SwiftUI
 struct UserDetailView: View {
     
     @State var user: User
-    @ObservedObject var viewModel = UserDetailViewModel()
     @State var profileImage: UIImage = UIImage(named: "defaultProfile")!
     
     var body: some View {
@@ -51,7 +50,7 @@ struct UserDetailView: View {
                     UserFieldView(title: "Date Available", value: user.userAttributes.dateAvailable)
                     UserFieldView(title: "Food Preference", value: user.userAttributes.foodPreference?.rawValue ?? "No Preference")
                     UserFieldView(title: "Cleanliness", value: "\(user.userAttributes.cleanliness)/5")
-                    UserFieldView(title: "Sleep Schedule", value: viewModel.getSleepSchedule(sleepSchedule: user.userAttributes.sleepSchedule))
+                    UserFieldView(title: "Sleep Schedule", value: getSleepSchedule(sleepSchedule: user.userAttributes.sleepSchedule))
                     SwiftUI.Group {
                         UserFieldView(title: "Smoking", value: user.userAttributes.smoking! ? "Yes" : "No")
                         UserFieldView(title: "Partying", value: user.userAttributes.partying! ? "Yes" : "No")
@@ -68,7 +67,7 @@ struct UserDetailView: View {
                 Spacer()
             }
             .onAppear {
-                viewModel.getProfileImage(imageURLString: user.userAttributes.profileImage)
+                
                 NetworkRequester.shared.downloadImage(url: user.userAttributes.profileImage) { image in
                     self.profileImage = image
                 }
@@ -77,6 +76,18 @@ struct UserDetailView: View {
         }
         .background(Color("BackgroundColor"))
         
+    }
+    
+    func getSleepSchedule(sleepSchedule: UserAttributes.SleepSchedule) -> String {
+        switch sleepSchedule {
+        case .earlyBird:
+            return "Early Bird"
+        case .nightOwl:
+            return "Night Owl"
+            
+        case .somewhereInBetween:
+            return "Somewhere In Between"
+        }
     }
 }
 

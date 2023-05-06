@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>892398854239-b77s5qjr504onaba736u3ei57s6qvqj3.apps.googleusercontent.com</string>
+	<string>169185246287-r7553ffa8n7o25ta427v80clsdgm9sle.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.892398854239-b77s5qjr504onaba736u3ei57s6qvqj3</string>
+	<string>com.googleusercontent.apps.169185246287-r7553ffa8n7o25ta427v80clsdgm9sle</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAGUJYHUHGWrcflDGXmwmPmrHrkoquWaL8</string>
+	<string>AIzaSyAcU-Hy3tUhsN506ZKLoBTgWvmdt-WV06Q</string>
 	<key>GCM_SENDER_ID</key>
-	<string>892398854239</string>
+	<string>169185246287</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>edu.syr.RoomieMatch</string>
 	<key>PROJECT_ID</key>
-	<string>roomiematch-803d1</string>
+	<string>roomiematch-93ae7</string>
 	<key>STORAGE_BUCKET</key>
-	<string>roomiematch-803d1.appspot.com</string>
+	<string>roomiematch-93ae7.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:892398854239:ios:cb7eaa8789ef5e684bfbea</string>
+	<string>1:169185246287:ios:9215e13047312d2cbc7e3a</string>
 </dict>
 </plist>

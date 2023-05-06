@@ -12,19 +12,18 @@ import Foundation
 
 public struct LikeResponseGroup: Codable {
 
-    /** Unique group ID. */
-    public var groupId: String
+    public var groupIds: [String]
     public var userIds: [String]
     public var userNames: [String]
 
-    public init(groupId: String, userIds: [String], userNames: [String]) {
-        self.groupId = groupId
+    public init(groupIds: [String], userIds: [String], userNames: [String]) {
+        self.groupIds = groupIds
         self.userIds = userIds
         self.userNames = userNames
     }
 
     public enum CodingKeys: String, CodingKey { 
-        case groupId
+        case groupIds = "group_ids"
         case userIds = "user_ids"
         case userNames = "user_names"
     }

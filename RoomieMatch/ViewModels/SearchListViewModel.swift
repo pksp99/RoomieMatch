@@ -104,14 +104,15 @@ class SearchListViewModel: ObservableObject {
         }
     }
     
-    func addChat(group:  LikeResponseGroup) {
+    func addChat(group: LikeResponseGroup) {
         let chatId = getConcatId(userIDs: group.userIds)
-        var chat = Chat(id: chatId, names: group.userNames, userIds: group.userIds, lastUpdated: Date(), messages: [])
+        var chat = Chat(id: chatId, names: group.userNames, userIds: group.userIds, groupIds: group.groupIds, lastUpdated: Date(), messages: [])
         let ref = db.collection("chats").document(chat.id)
         ref.setData([
             "id": chat.id,
             "names": chat.names,
             "userIds": chat.userIds,
+            "groupIds": chat.groupIds,
             "lastUpdated": chat.lastUpdated,
             "messages": chat.messages.map { message in
                 return [

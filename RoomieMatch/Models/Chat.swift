@@ -11,6 +11,7 @@ struct Chat: Identifiable {
     let id: String
     var names: [String]
     var userIds: [String]
+    var groupIds: [String]
     var lastUpdated: Date
     var messages: [Message]
 }

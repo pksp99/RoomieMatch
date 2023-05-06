@@ -18,8 +18,15 @@ struct SearchListView: View {
                 VStack {
                     ForEach(viewModel.userGroups, id: \.groupId) { group in
                         VStack {
-                            GroupCardsView(users: group.users)
-                                .frame(height: 300)
+                            if(group.users.count == 1) {
+                                NavigationLink(destination: UserDetailView(user: group.users[0])) {
+                                    UserCard(user: group.users[0], id: 0)
+                                }
+                            }
+                            else {
+                                GroupCardsView(users: group.users)
+                                    .frame(height: 300)
+                            }
                             
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)

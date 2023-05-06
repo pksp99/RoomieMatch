@@ -90,28 +90,36 @@ class AccountsViewModel: ObservableObject {
         
         self.setUserObject(userId: userId, email: email)
         let imageRef = Storage.storage().reference().child("images/\(userId).jpg")
-        imageRef.downloadURL{ (url, error) in
-            guard let downloadURL = url else {
-                print("Some error occurred while geting download url")
-                let url = USERS_ENDPOINT
-                NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
-                return
-            }
-            print("Image URL obtained: \(downloadURL)")
-            profileImageURL = downloadURL.absoluteString
-            self.user?.userAttributes.profileImage = profileImageURL
-            //            print(self.user!.userAttributes)
-            let url = USERS_ENDPOINT
-            NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
-            
-        }
+        print("Hello: " + userId)
+        
         if let imageData = self.profileImage?.jpegData(compressionQuality: 0.8) {
             imageRef.putData(imageData, metadata: nil) { (metadata, error) in
                 guard metadata != nil else {
                     print("Error uploading image: \(error?.localizedDescription ?? "Unknown error")")
+                    let url = USERS_ENDPOINT
+                    NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
                     return
                 }
+                imageRef.downloadURL{ (url, error) in
+                    guard let downloadURL = url else {
+                        print("Some error occurred while geting download url: \(error?.localizedDescription)")
+                        let url = USERS_ENDPOINT
+                        NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
+                        return
+                    }
+                    print("Image URL obtained: \(downloadURL)")
+                    profileImageURL = downloadURL.absoluteString
+                    self.user?.userAttributes.profileImage = profileImageURL
+                    //            print(self.user!.userAttributes)
+                    let url = USERS_ENDPOINT
+                    NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
+                    
+                }
             }
+        }
+        else {
+            let url = USERS_ENDPOINT
+            NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
         }
     }
     

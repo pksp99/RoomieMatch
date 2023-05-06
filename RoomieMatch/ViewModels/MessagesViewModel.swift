@@ -22,8 +22,9 @@ class MessagesViewModel: ObservableObject {
                     let data = document.data()
                     let id = data["id"] as! String
                     let names = data["names"] as! [String]
-                    let userIds = data["users"] as! [String]
-                    let lastUpdated = data["lastUpdated"] as! Date
+                    let userIds = data["userIds"] as! [String]
+                    let timeStamp = data["lastUpdated"] as! Timestamp
+                    let lastUpdated = timeStamp.dateValue()
                     let messagesData = data["messages"] as! [[String:Any]]
                     var messages: [Message] = []
                     for messageData in messagesData {

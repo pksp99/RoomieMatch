@@ -27,6 +27,9 @@ struct MessagesView: View {
                             .listRowBackground(Color("SecondaryAccentColor"))
                     
                     }
+                    .onAppear {
+                        viewModel.getAllChats()
+                    }
                     .background(Color("BackgroundColor"))
                 .scrollContentBackground(.hidden)
                 

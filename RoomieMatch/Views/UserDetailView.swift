@@ -17,18 +17,18 @@ struct UserDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                if let profileImage = viewModel.profileImage {
-                   Image(uiImage: profileImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: UIScreen.main.bounds.width - 32)
-                        .cornerRadius(16)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.gray, lineWidth: 0.5)
-                        )
-                        .padding(.horizontal, 16)
-                }
+                
+                Image(uiImage: viewModel.profileImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: UIScreen.main.bounds.width - 32)
+                    .cornerRadius(16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color.gray, lineWidth: 0.5)
+                    )
+                    .padding(.horizontal, 16)
+                
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(user.userAttributes.name)

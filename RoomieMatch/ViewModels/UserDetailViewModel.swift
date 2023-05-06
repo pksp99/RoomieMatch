@@ -12,7 +12,7 @@ import FirebaseStorage
 
 class UserDetailViewModel: ObservableObject {
     
-    @Published var profileImage: UIImage? = UIImage(named: "defaultProfile")
+    @Published var profileImage: UIImage = UIImage(named: "defaultProfile")!
     
     
     func getProfileImage(imageURLString: String) {
@@ -23,7 +23,7 @@ class UserDetailViewModel: ObservableObject {
                 if let error = error {
                     print("Unable to get the image: \(error)")
                 }
-                self.profileImage = UIImage(data: data!)
+                self.profileImage = UIImage(data: data!) ?? UIImage(named: "defaultProfile")!
             }
         }
         else {

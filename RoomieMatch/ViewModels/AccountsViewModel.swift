@@ -22,9 +22,9 @@ class AccountsViewModel: ObservableObject {
     @Published var bio: String = ""
     @Published var cleanliness: Int = 0
     @Published var sleepSchedule: UserAttributes.SleepSchedule = UserAttributes.SleepSchedule.earlyBird
-    @Published var somking: Bool = false
+    @Published var smoking: Bool = false
     @Published var partying: Bool = false
-    @Published var pet_friedly: Bool = false
+    @Published var petFriendly: Bool = false
     @Published var profileImage: UIImage? = UIImage(named: "defaultProfile")
     
     
@@ -68,9 +68,9 @@ class AccountsViewModel: ObservableObject {
             bio = user.userAttributes.bio ?? ""
             cleanliness = user.userAttributes.cleanliness
             sleepSchedule = user.userAttributes.sleepSchedule
-            somking = user.userAttributes.smoking ?? false
+            smoking = user.userAttributes.smoking ?? false
             partying = user.userAttributes.partying ?? false
-            pet_friedly = user.userAttributes.petFriendly ?? false
+            petFriendly = user.userAttributes.petFriendly ?? false
             
             let imageURLString = user.userAttributes.profileImage
             if isFirebaseStorageURL(imageURLString) {
@@ -126,6 +126,11 @@ class AccountsViewModel: ObservableObject {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         var userAttribute = UserAttributes(name: self.name, intro: self.intro, profileImage: profileImageURL, gender: self.gender, monthlyBudget: Int(self.monthlyBudet) ?? 500, major: self.major, dateAvailable: dateFormatter.string(from: self.dateAvailable), coverImages: [], cleanliness: self.cleanliness, sleepSchedule: self.sleepSchedule)
+        userAttribute.smoking = smoking
+        userAttribute.partying = partying
+        userAttribute.petFriendly = petFriendly
+        
+        print(userAttribute)
         if self.user != nil {
             self.user?.userAttributes = userAttribute
         }

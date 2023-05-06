@@ -81,7 +81,7 @@ struct AccountView: View {
                 }) {
                     HStack {
                         Text("$").foregroundColor(.accentColor)
-                        TextField("Monthly Budget", value: $viewModel.monthlyBudet, formatter: NumberFormatter())
+                        TextField("Monthly Budget", text: $viewModel.monthlyBudet)
                             .keyboardType(.numberPad)
                             .foregroundColor(Color("DarkGray"))
                     }
@@ -115,7 +115,7 @@ struct AccountView: View {
                         Text("Somewhere in Between").tag(UserAttributes.SleepSchedule.somewhereInBetween)
                     }
                     
-                    Toggle(isOn: $viewModel.somking) {
+                    Toggle(isOn: $viewModel.smoking) {
                         Text("Smoking")
                     }
                     .toggleStyle(SwitchToggleStyle(tint: Color.accentColor))
@@ -124,7 +124,7 @@ struct AccountView: View {
                         Text("Partying")
                     }.toggleStyle(SwitchToggleStyle(tint: Color.accentColor))
                     
-                    Toggle(isOn: $viewModel.pet_friedly) {
+                    Toggle(isOn: $viewModel.petFriendly) {
                         Text("Pet Friendly")
                     }.toggleStyle(SwitchToggleStyle(tint: Color.accentColor))
                 }
@@ -155,7 +155,7 @@ struct AccountView: View {
                         Button(action: {
                             if (viewModel.validate()) {
                                 viewModel.postUserDetail(userId: appState.userId!, email: appState.userEmail!)
-                                
+                                appState.userName = viewModel.name
                                 self.alertText = "Profile Updated"
                                 self.showingAlert = true
                             }

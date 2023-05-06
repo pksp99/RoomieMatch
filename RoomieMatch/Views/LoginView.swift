@@ -15,6 +15,8 @@ struct LoginView: View {
     @State private var error = ""
     @EnvironmentObject var appState: AppState
     
+    @Binding var isRegisteredNow: Bool
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -60,7 +62,7 @@ struct LoginView: View {
                     
                     
                     
-                    NavigationLink(destination: RegisterView().environmentObject(appState))
+                    NavigationLink(destination: RegisterView(isRegisteredNow: $isRegisteredNow).environmentObject(appState))
                     {
                         HStack {
                             Text("Don't have an account?")
@@ -111,6 +113,6 @@ struct LoginView_Previews: PreviewProvider {
 
     }
     static var previews: some View {
-        LoginView().environmentObject(getAppState())
+        LoginView(isRegisteredNow: .constant(false)).environmentObject(getAppState())
     }
 }

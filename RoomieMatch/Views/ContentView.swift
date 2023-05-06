@@ -17,7 +17,6 @@ class AppState: ObservableObject{
     var userName: String?
     var profileImage: UIImage?
     var userEmail: String?
-    
     init(isOnboarded: Bool) {
         self.isOnboarded = isOnboarded
     }
@@ -38,7 +37,7 @@ struct ContentView: View {
             ContentMainView().environmentObject(appState)
         }
         else {
-            LoginView()
+            LoginRegisterView()
                 .environmentObject(appState)
         }
     }

@@ -14,7 +14,7 @@ import Firebase
 class NetworkRequester {
     static let shared = NetworkRequester()
     let imageCache = NSCache<NSString, AnyObject>()
-    let userId = Auth.auth().currentUser?.uid
+    var userId = Auth.auth().currentUser?.uid
     private init(){}
     
     

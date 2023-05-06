@@ -95,6 +95,7 @@ struct LoginView: View {
                 let userId = Auth.auth().currentUser?.uid
                 appState.isOnboarded = true
                 appState.userId = userId
+                NetworkRequester.shared.userId = userId!
                 accountsViewModel.getUserDetail(userId: userId!) { result in
                     appState.userEmail = result.email
                     appState.userName = result.userAttributes.name

@@ -18,7 +18,7 @@ struct SearchListView: View {
                 VStack {
                     ForEach(viewModel.userGroups, id: \.groupId) { group in
                         VStack {
-                            GroupCardsView(users: dummyGetUserGroupsResponse.userGroups[0].users)
+                            GroupCardsView(users: group.users)
                                 .frame(height: 300)
                             
                             ZStack {

@@ -93,6 +93,7 @@ struct RegisterView: View {
             } else {
                 let userId = Auth.auth().currentUser?.uid
                 appState.userId = userId
+                NetworkRequester.shared.userId = userId!
                 appState.userEmail = email
                 self.isRegisteredNow = true
                 print("New account registered")

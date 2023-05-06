@@ -32,6 +32,7 @@ class NetworkRequester {
                     URLQueryItem(name: key, value: "\(value)")
                 }
             }
+        
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -78,6 +79,7 @@ class NetworkRequester {
                     URLQueryItem(name: key, value: "\(value)")
                 }
             }
+        print("Sending a request to: \(urlComponents.url?.absoluteString)")
         var request = URLRequest(url: urlComponents.url!)
         
         request.setValue(userId, forHTTPHeaderField: "x-userId")

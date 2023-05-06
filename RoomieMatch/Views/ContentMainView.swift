@@ -10,6 +10,7 @@ import Firebase
 
 struct ContentMainView: View {
     @EnvironmentObject var appState: AppState
+    @State var showMyGroup = false
     var body: some View {
         NavigationView {
             TabView {
@@ -34,6 +35,9 @@ struct ContentMainView: View {
                         Text("Accounts")
                     }
             }
+            .sheet(isPresented: $showMyGroup) {
+                MyGroupView()
+            }
             .navigationBarItems(
                 leading:
                     Menu {
@@ -49,10 +53,9 @@ struct ContentMainView: View {
                 trailing:
                     Menu {
                         Button(action: {
-                           //TODO User can change account settings, for example changing passwords.
-                            
+                            self.showMyGroup = true
                         }, label: {
-                            Label("Account Settings", systemImage: "gear")
+                            Label("My Group", systemImage: "person.3")
                         })
                         
                         Button(action: {
@@ -67,6 +70,7 @@ struct ContentMainView: View {
             )
 
         }
+        
 
     }
     func signOut() {

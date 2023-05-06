@@ -10,6 +10,7 @@ import SwiftUI
 struct MessagesView: View {
     @ObservedObject var viewModel = MessagesViewModel()
     @EnvironmentObject var appState: AppState
+    @State private var showingAlert = false
     var body: some View {
         ZStack {
             Color("BackgroundColor")
@@ -25,6 +26,15 @@ struct MessagesView: View {
                                 Spacer()
                             }
                             .listRowBackground(Color("SecondaryAccentColor"))
+                            .contextMenu {
+                                Button(action: {
+                                    viewModel.makeGroup(group1: chat.groupIds[0], group2: chat.groupIds[1])
+                                    showingAlert = true
+                                }) {
+                                    Text("Make Group")
+                                    Image(systemName: "arrow.up.bin.fill")
+                                }
+                            }
                     
                     }
                     .onAppear {
@@ -32,6 +42,9 @@ struct MessagesView: View {
                     }
                     .background(Color("BackgroundColor"))
                 .scrollContentBackground(.hidden)
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Requested to make group"), dismissButton: .default(Text("OK")))
+                }
                 
         }
     }
@@ -51,13 +64,13 @@ struct MessagesView_Previews: PreviewProvider {
         viewModel.chats = [Chat(
             id: "chat-123",
             names: ["Preet Karia", "Emily"],
-            userIds: ["user-1", "user-2"],
+            userIds: ["user-1", "user-2"], groupIds: ["group-1", "group-2"],
             lastUpdated: Date(),
             messages: []
         ),Chat(
             id: "chat-456",
             names: ["Preet Karia", "Emily", "Karan"],
-            userIds: ["user-3", "user-4", "user-5"],
+            userIds: ["user-3", "user-4", "user-5"], groupIds: ["group-1", "group-3"],
             lastUpdated: Date(),
             messages: []
         )]

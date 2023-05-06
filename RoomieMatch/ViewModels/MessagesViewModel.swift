@@ -23,6 +23,7 @@ class MessagesViewModel: ObservableObject {
                     let id = data["id"] as! String
                     let names = data["names"] as! [String]
                     let userIds = data["userIds"] as! [String]
+                    let groupIds = data["groupIds"] as! [String]
                     let timeStamp = data["lastUpdated"] as! Timestamp
                     let lastUpdated = timeStamp.dateValue()
                     let messagesData = data["messages"] as! [[String:Any]]
@@ -36,13 +37,13 @@ class MessagesViewModel: ObservableObject {
                         let message = Message(id: id, text: text, senderId: senderId, senderName: senderName, timeStamp: timeStamp)
                         messages.append(message)
                     }
-                    let chat = Chat(id: id, names: names, userIds: userIds, lastUpdated: lastUpdated, messages: messages)
+                    let chat = Chat(id: id, names: names, userIds: userIds, groupIds: groupIds, lastUpdated: lastUpdated, messages: messages)
                     self.chats.append(chat)
                 }
                 self.chats.sort(by: {$0.lastUpdated < $1.lastUpdated})
-                print("Received Chats: \(self.chats.count)")
+//                print("Received Chats: \(self.chats.count)")
                 self.chats = self.chats.filter {$0.userIds.contains(userId)}
-                print("Filter Chats: \(self.chats.count)")
+//                print("Filter Chats: \(self.chats.count)")
             }
         }
     }
@@ -74,6 +75,14 @@ class MessagesViewModel: ObservableObject {
             sysImageName = "person.3.fill"
         }
         return sysImageName
+    }
+    
+    func makeGroup(group1: String, group2: String) {
+        let url = MAKE_GROUP_ENDPOINT
+        print("Making group for \(group1) and \(group2)")
+        NetworkRequester.shared.postRequestWithNoBody(url: url, parameters: ["group_id_1": group1, "group_id_2": group2], responseType: EmptyResponse.self) {results in
+            
+        }
     }
 
 }

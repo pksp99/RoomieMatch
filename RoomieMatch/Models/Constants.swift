@@ -7,7 +7,7 @@
 
 import Foundation
 
-let BACKEND_API_URL = "editme.url"
+let BACKEND_API_URL = "http://localhost:8080"
 let USERS_ENDPOINT = "\(BACKEND_API_URL)/users"
 let DISMISS_USER_ENDPOINT = "\(BACKEND_API_URL)/dismiss"
 let LIKE_USER_ENDPOINT = "\(BACKEND_API_URL)/like"

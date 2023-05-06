@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
 
 
 // This class is used to download JSON from given url, make a post call and Image from the url
@@ -142,6 +143,8 @@ class NetworkRequester {
         }
         task.resume()
     }
+    
+    
 
     //this method is used to download Image from the URL. It also implements caching.
     func downloadImage(url urlString: String, completed: @escaping (UIImage) -> ()) {
@@ -155,23 +158,26 @@ class NetworkRequester {
             print("Invalid URL")
             return
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, err) in
-            guard let data = data else {
-                print("Error downloading Image")
-                print(err ?? "")
-                return
+        if isFirebaseStorageURL(urlString) {
+            let storageRef = Storage.storage().reference(forURL: urlString)
+            
+            storageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) -> Void in
+                if let error = error {
+                    print("Unable to get the image: \(error)")
+                }
+                completed(UIImage(data: data!) ?? UIImage(named: "defaultProfile")!)
             }
-            guard let image = UIImage(data: data) else {
-                print("Unable to create UIImage from the data")
-                return
-            }
-            self.imageCache.setObject(image, forKey: urlString as NSString)
-            DispatchQueue.main.async {
-                completed(image)
-            }
-        }.resume()
+        }
+        else {
+            print("Invalid URL for FirebaseStorage: \(urlString)")
+        }
+    }
+    
+    private func isFirebaseStorageURL(_ url: String) -> Bool {
+        let gsRegex = #"^gs:\/\/([\w-]+\.appspot\.com)\/(.+)$"#
+        let httpsRegex = #"^https?:\/\/firebasestorage\.googleapis\.com(:\d+)?\/v\d\/b\/([\w-]+)\.appspot\.com\/o\/(.+)\?alt=media&token=(.+)$"#
+        let gsMatch = url.range(of: gsRegex, options: .regularExpression)
+        let httpsMatch = url.range(of: httpsRegex, options: .regularExpression)
+        return (gsMatch != nil) || (httpsMatch != nil)
     }
 }

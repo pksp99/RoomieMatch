@@ -33,7 +33,7 @@ struct AccountView: View {
                             Text("Intro")
                             Text("*").foregroundColor(.accentColor)
                         }
-                        TextField("Breif one line intro", text: $viewModel.intro)
+                        TextField("Brief one line intro", text: $viewModel.intro)
                             .foregroundColor(Color("DarkGray"))
                     }
                     Picker(selection: $viewModel.gender, label: Text("Gender")) {

@@ -74,30 +74,15 @@ class AccountsViewModel: ObservableObject {
             petFriendly = user.userAttributes.petFriendly ?? false
             
             let imageURLString = user.userAttributes.profileImage
-            if isFirebaseStorageURL(imageURLString) {
-                let storageRef = Storage.storage().reference(forURL: imageURLString)
-                
-                storageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) -> Void in
-                    if let error = error {
-                        print("Unable to get the image: \(error)")
-                    }
-                    self.profileImage = UIImage(data: data!)
-                }
+            
+            NetworkRequester.shared.downloadImage(url: imageURLString) { image in
+                self.profileImage = image
             }
-            else {
-                print("Invalid URL for FirebaseStorage: \(imageURLString)")
-            }
+            
         }
     }
     
-    private func isFirebaseStorageURL(_ url: String) -> Bool {
-        let gsRegex = #"^gs:\/\/([\w-]+\.appspot\.com)\/(.+)$"#
-        let httpsRegex = #"^https?:\/\/firebasestorage\.googleapis\.com(:\d+)?\/v\d\/b\/([\w-]+)\.appspot\.com\/o\/(.+)\?alt=media&token=(.+)$"#
-        let gsMatch = url.range(of: gsRegex, options: .regularExpression)
-        let httpsMatch = url.range(of: httpsRegex, options: .regularExpression)
-        return (gsMatch != nil) || (httpsMatch != nil)
-    }
-
+    
     
     
     func postUserDetail(userId: String, email: String) {
@@ -115,7 +100,7 @@ class AccountsViewModel: ObservableObject {
             print("Image URL obtained: \(downloadURL)")
             profileImageURL = downloadURL.absoluteString
             self.user?.userAttributes.profileImage = profileImageURL
-//            print(self.user!.userAttributes)
+            //            print(self.user!.userAttributes)
             let url = USERS_ENDPOINT
             NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
             

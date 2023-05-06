@@ -15,7 +15,7 @@ struct SearchListView: View {
         }
         else {
             ScrollView {
-                VStack {
+                LazyVStack {
                     ForEach(viewModel.userGroups, id: \.groupId) { group in
                         VStack {
                             if(group.users.count == 1) {

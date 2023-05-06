@@ -9,7 +9,8 @@ import SwiftUI
 
 struct UserCard: View {
     @State var user: User
-    @ObservedObject var viewModel = UserDetailViewModel()
+    @State var profileImage: UIImage = UIImage(named: "defaultProfile")!
+    
     var id: Int
     var body: some View {
         ZStack {
@@ -20,7 +21,7 @@ struct UserCard: View {
             
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
-                    Image(uiImage: viewModel.profileImage) //TODO change
+                    Image(uiImage: profileImage) //TODO change
                         .resizable()
                         .scaledToFill()
                         .frame(maxHeight: geometry.size.height/2.2)
@@ -100,7 +101,9 @@ struct UserCard: View {
                 .stroke(Color.accentColor, lineWidth: 1)
         )
         .onAppear {
-            viewModel.getProfileImage(imageURLString: user.userAttributes.profileImage)
+            NetworkRequester.shared.downloadImage(url: user.userAttributes.profileImage) { image in
+                self.profileImage = image
+            }
         }
         .id(id)
     }

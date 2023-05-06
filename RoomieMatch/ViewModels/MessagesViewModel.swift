@@ -39,6 +39,8 @@ class MessagesViewModel: ObservableObject {
                     self.chats.append(chat)
                 }
                 self.chats.sort(by: {$0.lastUpdated < $1.lastUpdated})
+                print("Received Chats")
+                print(self.chats)
             }
         }
     }

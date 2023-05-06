@@ -28,7 +28,11 @@ class SearchListViewModel: ObservableObject {
             case .success(let responseData):
                 print("GetUserGroupsResponse JSON download and Decode successful")
                 self.getUserGroupsResponse = responseData
-                self.userGroups = self.getUserGroupsResponse!.userGroups
+                DispatchQueue.main.async {
+                    self.userGroups = self.getUserGroupsResponse!.userGroups
+                }
+                
+                self.getLikedGroups()
             case .failure(_):
                 print("Error getting userGroup from \(url)")
             }
@@ -42,10 +46,14 @@ class SearchListViewModel: ObservableObject {
             switch result {
             case .success(let groupList):
                 print("Received all liked groups for user")
-                self.likedGroups = []
-                groupList.groups.forEach { group in
-                    self.likedGroups.append(group.groupId)
+                DispatchQueue.main.async {
+                    self.likedGroups = []
+                    groupList.groups.forEach { group in
+                        self.likedGroups.append(group.groupId)
+                    }
+                    print(self.likedGroups)
                 }
+                
             case .failure(_):
                 print("Error getting liked groups: \(url)")
             }
@@ -73,6 +81,7 @@ class SearchListViewModel: ObservableObject {
             switch result {
             case .success(let likeResponse):
                 print("Like Success")
+                print(likeResponse)
                 if likeResponse.mutualLike, let chatGroup = likeResponse.group {
                     self.addChat(group: chatGroup)
                 }

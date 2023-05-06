@@ -13,12 +13,13 @@ struct UserDetailView: View {
     
     @State var user: User
     @ObservedObject var viewModel = UserDetailViewModel()
+    @State var profileImage: UIImage = UIImage(named: "defaultProfile")!
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 
-                Image(uiImage: viewModel.profileImage)
+                Image(uiImage: profileImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: UIScreen.main.bounds.width - 32)
@@ -68,6 +69,9 @@ struct UserDetailView: View {
             }
             .onAppear {
                 viewModel.getProfileImage(imageURLString: user.userAttributes.profileImage)
+                NetworkRequester.shared.downloadImage(url: user.userAttributes.profileImage) { image in
+                    self.profileImage = image
+                }
             }
             
         }

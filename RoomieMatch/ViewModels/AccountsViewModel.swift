@@ -101,15 +101,20 @@ class AccountsViewModel: ObservableObject {
     func postUserDetail(userId: String, email: String) {
         var profileImageURL: String = ""
         
-        
+        self.setUserObject(userId: userId, email: email)
         let imageRef = Storage.storage().reference().child("images/\(userId).jpg")
         imageRef.downloadURL{ (url, error) in
             guard let downloadURL = url else {
                 print("Some error occurred while geting download url")
+                let url = USERS_ENDPOINT
+                NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
                 return
             }
             print("Image URL obtained: \(downloadURL)")
             profileImageURL = downloadURL.absoluteString
+            self.user?.userAttributes.profileImage = profileImageURL
+            let url = USERS_ENDPOINT
+            NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
             
         }
         if let imageData = self.profileImage?.jpegData(compressionQuality: 0.8) {
@@ -120,12 +125,12 @@ class AccountsViewModel: ObservableObject {
                 }
             }
         }
-        
-        
-        
+    }
+    
+    func setUserObject(userId: String, email: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        var userAttribute = UserAttributes(name: self.name, intro: self.intro, profileImage: profileImageURL, gender: self.gender, monthlyBudget: Int(self.monthlyBudet) ?? 500, major: self.major, dateAvailable: dateFormatter.string(from: self.dateAvailable), coverImages: [], cleanliness: self.cleanliness, sleepSchedule: self.sleepSchedule)
+        var userAttribute = UserAttributes(name: self.name, intro: self.intro, profileImage: "", gender: self.gender, monthlyBudget: Int(self.monthlyBudet) ?? 500, major: self.major, dateAvailable: dateFormatter.string(from: self.dateAvailable), coverImages: [], cleanliness: self.cleanliness, sleepSchedule: self.sleepSchedule)
         userAttribute.smoking = smoking
         userAttribute.partying = partying
         userAttribute.petFriendly = petFriendly
@@ -138,9 +143,5 @@ class AccountsViewModel: ObservableObject {
         else {
             self.user = User(userId: userId, email: email, groupId: UUID().uuidString, userAttributes: userAttribute)
         }
-        
-        let url = USERS_ENDPOINT
-        
-        NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
     }
 }

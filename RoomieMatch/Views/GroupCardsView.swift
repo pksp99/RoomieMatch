@@ -47,8 +47,11 @@ struct GroupCardsView: View {
                         }
                         .frame(width: proxy.size.width, height: proxy.size.height)
                     })
-                    Spacer()
-                    Spacer()
+                    if (users.count > 1) {
+                        Spacer()
+                        Spacer()
+                        
+                    }
                 }
             }
             

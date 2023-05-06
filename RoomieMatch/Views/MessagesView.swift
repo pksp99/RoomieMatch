@@ -28,7 +28,7 @@ struct MessagesView: View {
                     
                     }
                     .onAppear {
-                        viewModel.getAllChats()
+                        viewModel.getAllChats(userId: appState.userId!)
                     }
                     .background(Color("BackgroundColor"))
                 .scrollContentBackground(.hidden)

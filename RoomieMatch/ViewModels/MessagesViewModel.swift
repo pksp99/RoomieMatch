@@ -12,7 +12,7 @@ class MessagesViewModel: ObservableObject {
     @Published var chats: [Chat] = []
     let db = Firestore.firestore()
     
-    func getAllChats() {
+    func getAllChats(userId: String) {
         db.collection("chats").getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Error getting all chats")
@@ -40,8 +40,9 @@ class MessagesViewModel: ObservableObject {
                     self.chats.append(chat)
                 }
                 self.chats.sort(by: {$0.lastUpdated < $1.lastUpdated})
-                print("Received Chats")
-                print(self.chats)
+                print("Received Chats: \(self.chats.count)")
+                self.chats = self.chats.filter {$0.userIds.contains(userId)}
+                print("Filter Chats: \(self.chats.count)")
             }
         }
     }

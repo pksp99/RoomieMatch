@@ -105,7 +105,8 @@ class SearchListViewModel: ObservableObject {
     }
     
     func addChat(group:  LikeResponseGroup) {
-        var chat = Chat(id: UUID().uuidString, names: group.userNames, userIds: group.userIds, lastUpdated: Date(), messages: [])
+        let chatId = getConcatId(userIDs: group.userIds)
+        var chat = Chat(id: chatId, names: group.userNames, userIds: group.userIds, lastUpdated: Date(), messages: [])
         let ref = db.collection("chats").document(chat.id)
         ref.setData([
             "id": chat.id,
@@ -130,4 +131,10 @@ class SearchListViewModel: ObservableObject {
         }
     }
 
+    private func getConcatId (userIDs: [String]) -> String {
+        let temp = userIDs.sorted()
+        var str = ""
+        temp.forEach{ str += $0}
+        return str
+    }
 }

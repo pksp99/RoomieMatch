@@ -14,7 +14,7 @@ struct LoginView: View {
     @State private var password = ""
     @State private var error = ""
     @EnvironmentObject var appState: AppState
-    
+    var accountsViewModel = AccountsViewModel()
     @Binding var isRegisteredNow: Bool
     
     var body: some View {
@@ -95,6 +95,10 @@ struct LoginView: View {
                 let userId = Auth.auth().currentUser?.uid
                 appState.isOnboarded = true
                 appState.userId = userId
+                accountsViewModel.getUserDetail(userId: userId!) { result in
+                    appState.userEmail = result.email
+                    appState.userName = result.userAttributes.name
+                }
                 
             }
         }

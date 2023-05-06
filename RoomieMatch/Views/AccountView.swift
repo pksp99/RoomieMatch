@@ -139,7 +139,7 @@ struct AccountView: View {
                 
             }
             .onAppear {
-                viewModel.getUserDetail(userId: appState.userId!)
+                viewModel.getUserDetail(userId: appState.userId!) {result in}
             }
             .background(Color("BackgroundColor"))
             .scrollContentBackground(.hidden)
@@ -150,7 +150,7 @@ struct AccountView: View {
                 if appState.isOnboarded {
                     HStack(alignment: .bottom) {
                         Button(action: {
-                            viewModel.getUserDetail(userId: appState.userId!)
+                            viewModel.getUserDetail(userId: appState.userId!) {result in}
                             
                         }) {
                             Text("Cancel")

@@ -38,7 +38,7 @@ class AccountsViewModel: ObservableObject {
         return !failure
     }
     
-    func getUserDetail(userId: String) {
+    func getUserDetail(userId: String, completed: @escaping (User)->()) {
         let url = "\(USERS_ENDPOINT)/\(userId)"
         
         NetworkRequester.shared.getRequest(url: url, responseType: User.self) { result in
@@ -47,6 +47,7 @@ class AccountsViewModel: ObservableObject {
             case .success(let responseData):
                 print("User JSON download and Decode successful")
                 self.user = responseData
+                completed(responseData)
                 self.mapUserData()
             case .failure(_):
                 print("Error getting User from \(url)")
@@ -113,6 +114,7 @@ class AccountsViewModel: ObservableObject {
             print("Image URL obtained: \(downloadURL)")
             profileImageURL = downloadURL.absoluteString
             self.user?.userAttributes.profileImage = profileImageURL
+//            print(self.user!.userAttributes)
             let url = USERS_ENDPOINT
             NetworkRequester.shared.postRequest(url: url, parameters: nil, requestBody: self.user, responseType: EmptyResponse.self){ result in }
             
@@ -136,7 +138,6 @@ class AccountsViewModel: ObservableObject {
         userAttribute.petFriendly = petFriendly
         userAttribute.bio = bio
         userAttribute.foodPreference = foodPreference
-        print(userAttribute)
         if self.user != nil {
             self.user?.userAttributes = userAttribute
         }

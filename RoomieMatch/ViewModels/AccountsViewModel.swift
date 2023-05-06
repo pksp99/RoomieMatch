@@ -89,9 +89,10 @@ class AccountsViewModel: ObservableObject {
             }
         }
     }
+    
     private func isFirebaseStorageURL(_ url: String) -> Bool {
         let gsRegex = #"^gs:\/\/([\w-]+\.appspot\.com)\/(.+)$"#
-        let httpsRegex = #"^https:\/\/firebasestorage\.googleapis\.com\/v\d\/b\/([\w-]+)\/o\/(.+)$"#
+        let httpsRegex = #"^https?:\/\/firebasestorage\.googleapis\.com(:\d+)?\/v\d\/b\/([\w-]+)\.appspot\.com\/o\/(.+)\?alt=media&token=(.+)$"#
         let gsMatch = url.range(of: gsRegex, options: .regularExpression)
         let httpsMatch = url.range(of: httpsRegex, options: .regularExpression)
         return (gsMatch != nil) || (httpsMatch != nil)

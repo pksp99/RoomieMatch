@@ -127,7 +127,12 @@ struct AccountView: View {
                     Toggle(isOn: $viewModel.petFriendly) {
                         Text("Pet Friendly")
                     }.toggleStyle(SwitchToggleStyle(tint: Color.accentColor))
+                    
                 }
+                VStack {
+                    Rectangle().frame(height: 40).opacity(0)
+                        
+                }.listRowBackground(Color("BackgroundColor"))
             }
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(selectedImage: $viewModel.profileImage)
@@ -203,6 +208,7 @@ struct AccountView: View {
                 }
             }
             .padding()
+            .padding(.vertical, 70)
             .ignoresSafeArea()
             .opacity(0.95)
         }

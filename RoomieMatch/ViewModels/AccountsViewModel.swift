@@ -129,7 +129,8 @@ class AccountsViewModel: ObservableObject {
         userAttribute.smoking = smoking
         userAttribute.partying = partying
         userAttribute.petFriendly = petFriendly
-        
+        userAttribute.bio = bio
+        userAttribute.foodPreference = foodPreference
         print(userAttribute)
         if self.user != nil {
             self.user?.userAttributes = userAttribute

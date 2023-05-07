@@ -129,6 +129,8 @@ struct MessageDetailView: View {
     
 }
 struct MessageDetailView_Previews: PreviewProvider {
+    
+    
     // Just for Preview
     static func getAppState() -> AppState {
         
@@ -137,8 +139,8 @@ struct MessageDetailView_Previews: PreviewProvider {
         
     }
     
-    static var previews: some View {
-        MessageDetailView(messages: [
+    static func getMessages() -> [Message] {
+        return [
             Message(id: "1", text: "Hey, how are you?", senderId: "user1", senderName: "John", timeStamp: Date()),
             Message(id: "2", text: "Did you watch the game last night?", senderId: "user1", senderName: "John", timeStamp: Date()),
             Message(id: "3", text: "Are you free for lunch today?", senderId: "user1", senderName: "John", timeStamp: Date()),
@@ -147,6 +149,9 @@ struct MessageDetailView_Previews: PreviewProvider {
             Message(id: "6", text: "Sorry, I'm not free for lunch today. How about tomorrow?", senderId: "user1", senderName: "Mike", timeStamp: Date()),
             Message(id: "7", text: "Hey, have you seen the new movie that just came out?", senderId: "user4", senderName: "Emily", timeStamp: Date())
         ]
-        ).environmentObject(getAppState())
+    }
+    
+    static var previews: some View {
+        MessageDetailView(messages: getMessages()).environmentObject(getAppState())
     }
 }

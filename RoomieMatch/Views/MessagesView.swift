@@ -19,6 +19,7 @@ struct MessagesView: View {
             List(viewModel.chats) { chat in
                 NavigationLink(destination: MessageDetailView(chatId: chat.id)) {
                     HStack(alignment: .center) {
+                        
                         // Chat profile image
                         Image(systemName: viewModel.getChatProfileImage(chat: chat, userName: appState.userName!))
                             .resizable()
@@ -38,7 +39,7 @@ struct MessagesView: View {
                         Spacer()
                         
                         // Last updated time
-                        Text(getLastUpdatedTimeString(for: chat.lastUpdated))
+                        Text(viewModel.getLastUpdatedTimeString(for: chat.lastUpdated))
                             .padding()
                             .font(.caption)
                     }
@@ -58,7 +59,7 @@ struct MessagesView: View {
                
             }
             .onAppear {
-//                viewModel.getAllChats(userId: appState.userId!)
+                viewModel.getAllChats(userId: appState.userId!)
             }
             .background(Color("BackgroundColor"))
             .scrollContentBackground(.hidden)
@@ -68,23 +69,6 @@ struct MessagesView: View {
         }
     }
     
-    func getLastUpdatedTimeString(for date: Date) -> String {
-        let now = Date()
-        let secondsSinceUpdate = Int(now.timeIntervalSince(date))
-        let minutesSinceUpdate = secondsSinceUpdate / 60
-        let hoursSinceUpdate = minutesSinceUpdate / 60
-        let daysSinceUpdate = hoursSinceUpdate / 24
-
-        if daysSinceUpdate > 0 {
-            return "\(daysSinceUpdate) day\(daysSinceUpdate > 1 ? "s" : "") ago"
-        } else if hoursSinceUpdate > 0 {
-            return "\(hoursSinceUpdate) hour\(hoursSinceUpdate > 1 ? "s" : "") ago"
-        } else if minutesSinceUpdate > 0 {
-            return "\(minutesSinceUpdate) minute\(minutesSinceUpdate > 1 ? "s" : "") ago"
-        } else {
-            return "just now"
-        }
-    }
 
 }
 

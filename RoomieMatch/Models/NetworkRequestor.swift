@@ -11,10 +11,11 @@ import Firebase
 import FirebaseStorage
 
 
-// This class is used to download JSON from given url, make a post call and Image from the url
+// This singleton class is used to download JSON from given url, make a post call and Image from the url
 class NetworkRequester {
     static let shared = NetworkRequester()
     let imageCache = NSCache<NSString, AnyObject>()
+    
     var userId = Auth.auth().currentUser?.uid
     private init(){}
     
@@ -148,7 +149,7 @@ class NetworkRequester {
     
     
 
-    //this method is used to download Image from the URL. It also implements caching.
+    //this method is used to download Image in firebase from the URL. It also implements caching.
     func downloadImage(url urlString: String, completed: @escaping (UIImage) -> ()) {
         if let cachedImage = self.imageCache.object(forKey: urlString as NSString) as? UIImage{
             print("Returning cached Image for: \(urlString)")
@@ -175,6 +176,7 @@ class NetworkRequester {
         }
     }
     
+    // Before downloading the image, this is used to validate URL for Firebase.
     private func isFirebaseStorageURL(_ url: String) -> Bool {
         let gsRegex = #"^gs:\/\/([\w-]+\.appspot\.com)\/(.+)$"#
         let httpsRegex = #"^https?:\/\/firebasestorage\.googleapis\.com(:\d+)?\/v\d\/b\/([\w-]+)\.appspot\.com\/o\/(.+)\?alt=media&token=(.+)$"#

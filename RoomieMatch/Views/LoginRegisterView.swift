@@ -21,6 +21,8 @@ struct LoginRegisterView: View {
 }
 
 struct LoginRegisterView_Previews: PreviewProvider {
+    
+    //Just for preview
     static func getAppState() -> AppState {
         var appState = AppState(isOnboarded: false, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"), userEmail: "hey@gmail.com")
         return appState

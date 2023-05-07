@@ -15,7 +15,6 @@ class AppState: ObservableObject{
     
     var userId: String?
     var userName: String?
-    var profileImage: UIImage?
     var userEmail: String?
     init(isOnboarded: Bool) {
         self.isOnboarded = isOnboarded
@@ -25,7 +24,6 @@ class AppState: ObservableObject{
         self.isOnboarded = isOnboarded
         self.userId = userId
         self.userName = userName
-        self.profileImage = profileImage
         self.userEmail = userEmail
     }
 }

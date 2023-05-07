@@ -21,12 +21,14 @@ struct LoginView: View {
         NavigationView {
             ScrollView {
                 VStack {
+                    // App Logo
                     Image("ig-logo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 120, height: 120)
                         .padding(.bottom, 40)
                     
+                    //Email and Password
                     VStack(spacing: 16) {
                         TextField("Email", text: $email)
                             .autocapitalization(.none)
@@ -46,6 +48,8 @@ struct LoginView: View {
                     }
                     .padding(.horizontal)
                     
+                    
+                    // Login Button
                     Button(action: {
                         login()
                     }) {
@@ -61,7 +65,7 @@ struct LoginView: View {
                     .padding(.vertical)
                     
                     
-                    
+                    // Register button for new user.
                     NavigationLink(destination: RegisterView(isRegisteredNow: $isRegisteredNow).environmentObject(appState))
                     {
                         HStack {
@@ -87,11 +91,16 @@ struct LoginView: View {
         }
     }
     
+    // login button action.
     func login() {
+        
+        // Firebase call to sign in
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 self.error = error.localizedDescription
             } else {
+                
+                // setting appState and userId in networkRequestor after logged in.
                 let userId = Auth.auth().currentUser?.uid
                 appState.isOnboarded = true
                 appState.userId = userId

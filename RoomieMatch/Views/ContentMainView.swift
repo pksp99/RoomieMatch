@@ -39,17 +39,7 @@ struct ContentMainView: View {
                 MyGroupView()
             }
             .navigationBarItems(
-                leading:
-                    Menu {
-                        Button(action: {
-                            // TODO
-                        }, label: {
-                            Label("Saved People", systemImage: "star.fill")
-                        })
-                    } label: {
-                        Image(systemName: "line.horizontal.3")
-                            .imageScale(.large)
-                    },
+                
                 trailing:
                     Menu {
                         Button(action: {

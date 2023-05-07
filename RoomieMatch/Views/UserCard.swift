@@ -9,11 +9,12 @@ import SwiftUI
 
 struct UserCard: View {
     @State var user: User
-    @State var profileImage: UIImage = UIImage(named: "defaultProfile")!
+    @State var profileImage: UIImage? = UIImage(named: "defaultProfile")
     
     var id: Int
     var body: some View {
         ZStack {
+            
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color("BackgroundColor"))
                 .shadow(radius: 5)
@@ -21,16 +22,19 @@ struct UserCard: View {
             
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
-                    Image(uiImage: profileImage) //TODO change
+                    
+                    // Profile image
+                    Image(uiImage: profileImage ?? UIImage(named: "defaultProfile")!)
                         .resizable()
                         .scaledToFill()
                         .frame(maxHeight: geometry.size.height/2.2)
                         .clipped()
                     
-                    
+                    // Card Content
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("Free to Connect") // TODO change
+                            // Tag 1
+                            Text("Free to Connect")
                                 .font(.caption)
                                 .textCase(.uppercase)
                                 .foregroundColor(Color("AlmostBlackColor"))
@@ -41,7 +45,10 @@ struct UserCard: View {
                                         .frame(height: 20)
                                 )
                             Spacer()
-                            Text("Found a house") // TODO change
+                            
+                            // Tag 2
+                            // Fetching it dynamically
+                            Text(getCardTag(attribute: user.userAttributes))
                                 .font(.caption)
                                 .textCase(.uppercase)
                                 .foregroundColor(Color("AlmostBlackColor"))
@@ -53,20 +60,22 @@ struct UserCard: View {
                                 )
                         }
                         
-                        
+                        // User Name
                         Text(user.userAttributes.name)
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                         
-                        
+                        // User Intro
                         Text(user.userAttributes.intro)
                             .font(.caption)
                             .foregroundColor(.black)
                             
-
+                       
                         HStack{
                             VStack(alignment: .leading){
+                                
+                                // User Budget
                                 Text("Budget")
                                     .font(.subheadline)
                                 Text("$ \(user.userAttributes.monthlyBudget)")
@@ -75,6 +84,8 @@ struct UserCard: View {
                             }
                             Spacer()
                             VStack(alignment: .leading){
+                                
+                                // User Course Details
                                 Text("Course")
                                     .font(.subheadline)
                                 Text(user.userAttributes.major.rawValue)
@@ -101,11 +112,27 @@ struct UserCard: View {
                 .stroke(Color.accentColor, lineWidth: 1)
         )
         .onAppear {
+            
+            // Download image when from firebase when loaded.
             NetworkRequester.shared.downloadImage(url: user.userAttributes.profileImage) { image in
                 self.profileImage = image
             }
         }
         .id(id)
+    }
+    
+    // Function to get user tag based on petFriendly, smoking and party.
+    func getCardTag(attribute: UserAttributes) -> String {
+        if (attribute.petFriendly == true) {
+            return("LOVES PETS")
+        }
+        else if (attribute.partying == true) {
+            return("PARTY PERSON")
+        }
+        else if (attribute.smoking == false) {
+            return("NON SMOKER")
+        }
+        return("NEW HERE")
     }
 }
 

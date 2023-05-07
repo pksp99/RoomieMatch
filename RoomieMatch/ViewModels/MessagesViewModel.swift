@@ -84,5 +84,23 @@ class MessagesViewModel: ObservableObject {
             
         }
     }
+    
+    func getLastUpdatedTimeString(for date: Date) -> String {
+        let now = Date()
+        let secondsSinceUpdate = Int(now.timeIntervalSince(date))
+        let minutesSinceUpdate = secondsSinceUpdate / 60
+        let hoursSinceUpdate = minutesSinceUpdate / 60
+        let daysSinceUpdate = hoursSinceUpdate / 24
+
+        if daysSinceUpdate > 0 {
+            return "\(daysSinceUpdate) day\(daysSinceUpdate > 1 ? "s" : "") ago"
+        } else if hoursSinceUpdate > 0 {
+            return "\(hoursSinceUpdate) hour\(hoursSinceUpdate > 1 ? "s" : "") ago"
+        } else if minutesSinceUpdate > 0 {
+            return "\(minutesSinceUpdate) minute\(minutesSinceUpdate > 1 ? "s" : "") ago"
+        } else {
+            return "just now"
+        }
+    }
 
 }

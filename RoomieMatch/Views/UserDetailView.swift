@@ -12,13 +12,13 @@ import SwiftUI
 struct UserDetailView: View {
     
     @State var user: User
-    @State var profileImage: UIImage = UIImage(named: "defaultProfile")!
+    @State var profileImage: UIImage? = UIImage(named: "defaultProfile")
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 24) {
-                
-                Image(uiImage: profileImage)
+                // User profile image
+                Image(uiImage: profileImage ?? UIImage(named: "defaultProfile")!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 350 - 32)
@@ -31,9 +31,12 @@ struct UserDetailView: View {
                 
                 
                 VStack(alignment: .leading, spacing: 8) {
+                    
+                    // User Name
                     Text(user.userAttributes.name)
                         .font(.title)
                     
+                    // User Intro
                     Text(user.userAttributes.intro)
                         .font(.subheadline)
                         .foregroundColor(.gray)
@@ -68,6 +71,7 @@ struct UserDetailView: View {
             }
             .onAppear {
                 
+                // download user image from firebase
                 NetworkRequester.shared.downloadImage(url: user.userAttributes.profileImage) { image in
                     self.profileImage = image
                 }
@@ -78,6 +82,7 @@ struct UserDetailView: View {
         
     }
     
+    // Sleep schedule string based on enum values selected
     func getSleepSchedule(sleepSchedule: UserAttributes.SleepSchedule) -> String {
         switch sleepSchedule {
         case .earlyBird:

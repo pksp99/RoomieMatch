@@ -20,7 +20,6 @@
 		9A4267F929D4DE8E00A9C967 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4267F829D4DE8E00A9C967 /* ContentView.swift */; };
 		9A4267FB29D4DE8F00A9C967 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A4267FA29D4DE8F00A9C967 /* Assets.xcassets */; };
 		9A4267FE29D4DE8F00A9C967 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A4267FD29D4DE8F00A9C967 /* Preview Assets.xcassets */; };
-		9A4FC0E52A05B6B700FD96EF /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4FC0E42A05B6B700FD96EF /* UserDetailViewModel.swift */; };
 		9A4FC0E72A05CAE600FD96EF /* LoginRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4FC0E62A05CAE600FD96EF /* LoginRegisterView.swift */; };
 		9A67F8362A00097E00581209 /* GroupCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A67F8352A00097E00581209 /* GroupCardsView.swift */; };
 		9A67F8392A00434000581209 /* DummyUserGroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A67F8382A00434000581209 /* DummyUserGroupsModel.swift */; };
@@ -39,6 +38,7 @@
 		9ACEA4F729E4AB9B00A450E1 /* UserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACEA4F629E4AB9B00A450E1 /* UserCard.swift */; };
 		9AD078CF2A06E84100EDB25F /* MyGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD078CE2A06E84100EDB25F /* MyGroupView.swift */; };
 		9AD078D12A06FD8000EDB25F /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD078D02A06FD8000EDB25F /* MessageRow.swift */; };
+		9AD078D52A08287800EDB25F /* MessageDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD078D42A08287800EDB25F /* MessageDetailViewModel.swift */; };
 		9AD630BA2A04B25200E6F406 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD630B92A04B25200E6F406 /* Message.swift */; };
 		9AD630BC2A04B26B00E6F406 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD630BB2A04B26B00E6F406 /* Chat.swift */; };
 		9AEED2862A06CE9900D523E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AEED2852A06CE9800D523E2 /* GoogleService-Info.plist */; };
@@ -72,7 +72,6 @@
 		9A4267F829D4DE8E00A9C967 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9A4267FA29D4DE8F00A9C967 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A4267FD29D4DE8F00A9C967 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9A4FC0E42A05B6B700FD96EF /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
 		9A4FC0E62A05CAE600FD96EF /* LoginRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterView.swift; sourceTree = "<group>"; };
 		9A67F8352A00097E00581209 /* GroupCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardsView.swift; sourceTree = "<group>"; };
 		9A67F8372A0042E600581209 /* UserGroups.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserGroups.json; sourceTree = "<group>"; };
@@ -86,6 +85,7 @@
 		9ACEA4F629E4AB9B00A450E1 /* UserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCard.swift; sourceTree = "<group>"; };
 		9AD078CE2A06E84100EDB25F /* MyGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupView.swift; sourceTree = "<group>"; };
 		9AD078D02A06FD8000EDB25F /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
+		9AD078D42A08287800EDB25F /* MessageDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewModel.swift; sourceTree = "<group>"; };
 		9AD630B92A04B25200E6F406 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9AD630BB2A04B26B00E6F406 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		9AEED2852A06CE9800D523E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -139,8 +139,8 @@
 			children = (
 				9A15FCD829FC631800F57E2D /* SearchListViewModel.swift */,
 				9A030C622A04B5B00008E304 /* MessagesViewModel.swift */,
+				9AD078D42A08287800EDB25F /* MessageDetailViewModel.swift */,
 				9A76FEE32A05761100EE45E6 /* AccountsViewModel.swift */,
-				9A4FC0E42A05B6B700FD96EF /* UserDetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -149,20 +149,20 @@
 			isa = PBXGroup;
 			children = (
 				9A4267F829D4DE8E00A9C967 /* ContentView.swift */,
-				9ACEA4F629E4AB9B00A450E1 /* UserCard.swift */,
-				9A15FCCE29FC353E00F57E2D /* ContentMainView.swift */,
-				9A15FCD029FC560000F57E2D /* SearchListView.swift */,
-				9A15FCD229FC5EF100F57E2D /* MessagesView.swift */,
-				9A78AC332A04BB48005DCA51 /* MessageDetailView.swift */,
-				9A15FCD429FC5F1300F57E2D /* AccountView.swift */,
-				9A15FCD629FC5F2300F57E2D /* UserDetailView.swift */,
-				9A67F8352A00097E00581209 /* GroupCardsView.swift */,
 				9A4FC0E62A05CAE600FD96EF /* LoginRegisterView.swift */,
 				9A67F8532A00C62C00581209 /* LoginView.swift */,
 				9A67F8552A00C63900581209 /* RegisterView.swift */,
-				9A15C2292A05845000AE0E9C /* ImagePicker.swift */,
-				9AD078CE2A06E84100EDB25F /* MyGroupView.swift */,
+				9A15FCD429FC5F1300F57E2D /* AccountView.swift */,
+				9ACEA4F629E4AB9B00A450E1 /* UserCard.swift */,
+				9A67F8352A00097E00581209 /* GroupCardsView.swift */,
+				9A15FCD029FC560000F57E2D /* SearchListView.swift */,
+				9A15FCD629FC5F2300F57E2D /* UserDetailView.swift */,
+				9A15FCD229FC5EF100F57E2D /* MessagesView.swift */,
 				9AD078D02A06FD8000EDB25F /* MessageRow.swift */,
+				9A78AC332A04BB48005DCA51 /* MessageDetailView.swift */,
+				9A15FCCE29FC353E00F57E2D /* ContentMainView.swift */,
+				9AD078CE2A06E84100EDB25F /* MyGroupView.swift */,
+				9A15C2292A05845000AE0E9C /* ImagePicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 				9A4267F929D4DE8E00A9C967 /* ContentView.swift in Sources */,
 				9A4FC0E72A05CAE600FD96EF /* LoginRegisterView.swift in Sources */,
 				9A15C22A2A05845000AE0E9C /* ImagePicker.swift in Sources */,
-				9A4FC0E52A05B6B700FD96EF /* UserDetailViewModel.swift in Sources */,
+				9AD078D52A08287800EDB25F /* MessageDetailViewModel.swift in Sources */,
 				9A15FCCF29FC353E00F57E2D /* ContentMainView.swift in Sources */,
 				9AEED2C42A06D73F00D523E2 /* PreferredAttributes.swift in Sources */,
 				9AEED2C02A06D73F00D523E2 /* GroupList.swift in Sources */,

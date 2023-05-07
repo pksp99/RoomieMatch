@@ -15,14 +15,18 @@ struct MessageRow: View {
     
     var body: some View {
         HStack {
+            
+            // Other Message Row
             if !isSelf {
                 VStack(alignment: .leading){
+                    // Other User Name
                     Text(message.senderName ?? "Unknown User")
                         .font(.headline)
                         .foregroundColor(.gray)
                         .padding(.horizontal, 4)
                         .padding(.vertical, -6)
                     
+                    // Other user message text
                     Text(message.text)
                         .padding(8)
                         .background(Color.gray)
@@ -32,11 +36,13 @@ struct MessageRow: View {
                 }
                 Spacer()
             }
+            
+            // User Message Row
             else {
                 Spacer()
                 VStack(alignment: .leading){
 
-                    
+                    // User message Text
                     Text(message.text)
                         .padding(8)
                         .background(Color("SecondaryAccentColor"))

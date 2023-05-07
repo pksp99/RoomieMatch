@@ -18,8 +18,12 @@ struct AccountView: View {
     
     var body: some View {
         ZStack {
+            // Zstack layer one
             Form {
+                // Personal Information
                 Section(header: Text("Personal Information")) {
+                    
+                    // User Name
                     VStack(alignment: .leading) {
                         HStack {
                             Text("User Name")
@@ -28,6 +32,8 @@ struct AccountView: View {
                         TextField("Name", text: $viewModel.name).foregroundColor(Color("DarkGray"))
                             .disableAutocorrection(true)
                     }
+                    
+                    // User Intro
                     VStack(alignment: .leading) {
                         HStack {
                             Text("Intro")
@@ -36,17 +42,22 @@ struct AccountView: View {
                         TextField("Brief one line intro", text: $viewModel.intro)
                             .foregroundColor(Color("DarkGray"))
                     }
+                    
+                    // Gender
                     Picker(selection: $viewModel.gender, label: Text("Gender")) {
                         ForEach(UserAttributes.Gender.allCases, id: \.self) { preference in
                             Text(preference.rawValue.capitalized).tag(preference)
                         }
                     }
                     
+                    // Major
                     Picker(selection: $viewModel.major, label: Text("Major")) {
                         ForEach(UserAttributes.Major.allCases, id: \.self) { preference in
                             Text(preference.rawValue.capitalized).tag(preference)
                         }
                     }
+                    
+                    // Date Available
                     DatePicker(
                         selection: $viewModel.dateAvailable,
                         in: Date()...,
@@ -55,6 +66,8 @@ struct AccountView: View {
                         Text("Date Available")
                     }
                 }
+                
+                // User Profile Picture
                 Section(header: Text("Profile Picture")) {
                     if let image = viewModel.profileImage {
                         HStack(alignment: .center) {
@@ -75,6 +88,8 @@ struct AccountView: View {
                     }
                     
                 }.listRowBackground(Color("BackgroundColor"))
+                
+                // User Budget
                 Section(header: HStack {
                     Text("Budget")
                     Text("*").foregroundColor(.accentColor)
@@ -87,13 +102,18 @@ struct AccountView: View {
                     }
                 }
                 
+                
+                // User Bio
                 Section(header: Text("Bio")) {TextEditor(text: $viewModel.bio)
                         .frame(height: 100)
                         .cornerRadius(8)
                         .foregroundColor(Color("DarkGray"))
                 }
                 
+                // User Preferences
                 Section(header: Text("Preferences")) {
+                    
+                    // Food Preference
                     Picker(selection: $viewModel.foodPreference, label: Text("Food Preference")) {
                         Text("No Preference").tag(UserAttributes.FoodPreference.noPreference)
                         Text("Vegetarian").tag(UserAttributes.FoodPreference.vegetarian)
@@ -102,6 +122,7 @@ struct AccountView: View {
                         Text("Jain").tag(UserAttributes.FoodPreference.jain)
                     }
                     
+                    // Cleanliness rating out of 5
                     Stepper(value: $viewModel.cleanliness, in: 0...5) {
                         HStack {
                             Text("Cleanliness: ")
@@ -109,21 +130,25 @@ struct AccountView: View {
                         }
                     }
                     
+                    // Sleep schedule
                     Picker(selection: $viewModel.sleepSchedule, label: Text("Sleep Schedule")) {
                         Text("Early Bird").tag(UserAttributes.SleepSchedule.earlyBird)
                         Text("Night Owl").tag(UserAttributes.SleepSchedule.nightOwl)
                         Text("Somewhere in Between").tag(UserAttributes.SleepSchedule.somewhereInBetween)
                     }
                     
+                    // Is Smoker
                     Toggle(isOn: $viewModel.smoking) {
                         Text("Smoking")
                     }
                     .toggleStyle(SwitchToggleStyle(tint: Color.accentColor))
                     
+                    // Is party person
                     Toggle(isOn: $viewModel.partying) {
                         Text("Partying")
                     }.toggleStyle(SwitchToggleStyle(tint: Color.accentColor))
                     
+                    // Is pet friendly
                     Toggle(isOn: $viewModel.petFriendly) {
                         Text("Pet Friendly")
                     }.toggleStyle(SwitchToggleStyle(tint: Color.accentColor))
@@ -134,6 +159,7 @@ struct AccountView: View {
                         
                 }.listRowBackground(Color("BackgroundColor"))
             }
+            // Show image picker
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(selectedImage: $viewModel.profileImage)
                 
@@ -144,11 +170,15 @@ struct AccountView: View {
             .background(Color("BackgroundColor"))
             .scrollContentBackground(.hidden)
             
-            
+            // Zstack layer two
+            // Save and Cancel Buttons
             VStack {
                 Spacer()
+                // If onboarder show both save and cancel buttons.
                 if appState.isOnboarded {
                     HStack(alignment: .bottom) {
+                        
+                        // cancel button: resets all changes made
                         Button(action: {
                             viewModel.getUserDetail(userId: appState.userId!) {result in}
                             
@@ -157,6 +187,8 @@ struct AccountView: View {
                                 .foregroundColor(.red)
                         }
                         Spacer()
+                        
+                        // save button: Save changes made by user to database.
                         Button(action: {
                             if (viewModel.validate()) {
                                 viewModel.postUserDetail(userId: appState.userId!, email: appState.userEmail!)
@@ -168,8 +200,6 @@ struct AccountView: View {
                                 self.alertText = "Please add all mandaotory fields"
                                 self.showingAlert = true
                             }
-                            
-                            
                         }) {
                             Text("Save")
                                 .foregroundColor(.blue)
@@ -180,9 +210,12 @@ struct AccountView: View {
                     .frame(width: 300, height: 40)
                     .cornerRadius(10)
                 }
+                
+                // If not onboard: Only show save button.
                 else {
                     HStack(alignment: .bottom) {
                         
+                        // save button
                         Button(action: {
                             if (viewModel.validate()) {
                                 viewModel.postUserDetail(userId: appState.userId!, email: appState.userEmail!)

@@ -105,35 +105,47 @@ class SearchListViewModel: ObservableObject {
     }
     
     func addChat(group: LikeResponseGroup) {
-        let chatId = getConcatId(userIDs: group.userIds)
+        let chatId = getConcatId(groupIds: group.groupIds)
         var chat = Chat(id: chatId, names: group.userNames, userIds: group.userIds, groupIds: group.groupIds, lastUpdated: Date(), messages: [])
-        let ref = db.collection("chats").document(chat.id)
-        ref.setData([
-            "id": chat.id,
-            "names": chat.names,
-            "userIds": chat.userIds,
-            "groupIds": chat.groupIds,
-            "lastUpdated": chat.lastUpdated,
-            "messages": chat.messages.map { message in
-                return [
-                    "id": message.id,
-                    "text": message.text,
-                    "senderId": message.senderId,
-                    "senderName": message.senderName,
-                    "timeStamp": message.timeStamp
-                ] as [String : Any]
-            }
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
+    
+        
+        let docRef = db.collection("chats").document(chatId)
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // Document Already exists, no need to change/create it.
+                print("Document data: \(document.data()!)")
             } else {
-                print("Document added with ID: \(chat.id)")
+                // Document does not exist, then create it.
+                docRef.setData([
+                    "id": chat.id,
+                    "names": chat.names,
+                    "userIds": chat.userIds,
+                    "groupIds": chat.groupIds,
+                    "lastUpdated": chat.lastUpdated,
+                    "messages": chat.messages.map { message in
+                        return [
+                            "id": message.id,
+                            "text": message.text,
+                            "senderId": message.senderId,
+                            "senderName": message.senderName,
+                            "timeStamp": message.timeStamp
+                        ] as [String : Any]
+                    }
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added with ID: \(chat.id)")
+                    }
+                }
+                
             }
         }
     }
 
-    private func getConcatId (userIDs: [String]) -> String {
-        let temp = userIDs.sorted()
+    private func getConcatId (groupIds: [String]) -> String {
+        let temp = groupIds.sorted()
         var str = ""
         temp.forEach{ str += $0}
         return str

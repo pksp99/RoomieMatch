@@ -169,7 +169,14 @@ class NetworkRequester {
                     print("Unable to get the image: \(error)")
                 }
                 if let data = data {
-                    completed(UIImage(data: data) ?? UIImage(named: "defaultProfile")!)
+                    guard let image = UIImage(data: data) else {
+                        print("Unable to create UIImage from the data")
+                        return
+                    }
+                    self.imageCache.setObject(image, forKey: urlString as NSString)
+                    DispatchQueue.main.async {
+                        completed(image)
+                    }
                 }
             }
         }

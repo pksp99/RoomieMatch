@@ -16,36 +16,37 @@ struct MessagesView: View {
             Color("BackgroundColor")
                 .edgesIgnoringSafeArea(.all)
     
-                    List(viewModel.chats) { chat in
-                         
-                            HStack{
-                                Image(systemName: viewModel.getChatProfileImage(chat: chat, userName: appState.userName!)).resizable().clipShape(Circle()).frame(width: 50, height: 40)
-                                    .foregroundColor(Color("AlmostBlackColor")).opacity(0.7).padding()
-                                Text(viewModel.getChatName(chat: chat, userName: appState.userName!))
-                                    .font(.title2)
-                                Spacer()
-                            }
-                            .listRowBackground(Color("SecondaryAccentColor"))
-                            .contextMenu {
-                                Button(action: {
-                                    viewModel.makeGroup(group1: chat.groupIds[0], group2: chat.groupIds[1])
-                                    showingAlert = true
-                                }) {
-                                    Text("Make Group")
-                                    Image(systemName: "arrow.up.bin.fill")
-                                }
-                            }
+            List(viewModel.chats) { chat in
+                NavigationLink(destination: MessageDetailView(chatId: chat.id)) {
+                    HStack{
+                        Image(systemName: viewModel.getChatProfileImage(chat: chat, userName: appState.userName!)).resizable().clipShape(Circle()).frame(width: 50, height: 40)
+                            .foregroundColor(Color("AlmostBlackColor")).opacity(0.7).padding()
+                        Text(viewModel.getChatName(chat: chat, userName: appState.userName!))
+                            .font(.title2)
+                        Spacer()
+                    }
+                    .listRowBackground(Color("SecondaryAccentColor"))
+                    .contextMenu {
+                        Button(action: {
+                            viewModel.makeGroup(group1: chat.groupIds[0], group2: chat.groupIds[1])
+                            showingAlert = true
+                        }) {
+                            Text("Make Group")
+                            Image(systemName: "arrow.up.bin.fill")
+                        }
+                    }
                     
-                    }
-                    .onAppear {
-                        viewModel.getAllChats(userId: appState.userId!)
-                    }
-                    .background(Color("BackgroundColor"))
-                .scrollContentBackground(.hidden)
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Requested to make group"), dismissButton: .default(Text("OK")))
                 }
-                
+               
+            }
+            .onAppear {
+                viewModel.getAllChats(userId: appState.userId!)
+            }
+            .background(Color("BackgroundColor"))
+            .scrollContentBackground(.hidden)
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Requested to make group"), dismissButton: .default(Text("OK")))
+            }
         }
     }
 }

@@ -38,6 +38,7 @@
 		9AB748302A0481EF0015F6B0 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7482F2A0481EF0015F6B0 /* EmptyResponse.swift */; };
 		9ACEA4F729E4AB9B00A450E1 /* UserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACEA4F629E4AB9B00A450E1 /* UserCard.swift */; };
 		9AD078CF2A06E84100EDB25F /* MyGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD078CE2A06E84100EDB25F /* MyGroupView.swift */; };
+		9AD078D12A06FD8000EDB25F /* MessageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD078D02A06FD8000EDB25F /* MessageRow.swift */; };
 		9AD630BA2A04B25200E6F406 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD630B92A04B25200E6F406 /* Message.swift */; };
 		9AD630BC2A04B26B00E6F406 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD630BB2A04B26B00E6F406 /* Chat.swift */; };
 		9AEED2862A06CE9900D523E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AEED2852A06CE9800D523E2 /* GoogleService-Info.plist */; };
@@ -84,6 +85,7 @@
 		9AB7482F2A0481EF0015F6B0 /* EmptyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
 		9ACEA4F629E4AB9B00A450E1 /* UserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCard.swift; sourceTree = "<group>"; };
 		9AD078CE2A06E84100EDB25F /* MyGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupView.swift; sourceTree = "<group>"; };
+		9AD078D02A06FD8000EDB25F /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		9AD630B92A04B25200E6F406 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9AD630BB2A04B26B00E6F406 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		9AEED2852A06CE9800D523E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				9A67F8552A00C63900581209 /* RegisterView.swift */,
 				9A15C2292A05845000AE0E9C /* ImagePicker.swift */,
 				9AD078CE2A06E84100EDB25F /* MyGroupView.swift */,
+				9AD078D02A06FD8000EDB25F /* MessageRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				9AEED2BE2A06D73F00D523E2 /* Group.swift in Sources */,
 				9AEED2C62A06D73F00D523E2 /* HealthcheckResponse.swift in Sources */,
 				9A15FCD529FC5F1300F57E2D /* AccountView.swift in Sources */,
+				9AD078D12A06FD8000EDB25F /* MessageRow.swift in Sources */,
 				9AEED2C82A06D73F00D523E2 /* UserAttributes.swift in Sources */,
 				9A67F8362A00097E00581209 /* GroupCardsView.swift in Sources */,
 				9A67F8392A00434000581209 /* DummyUserGroupsModel.swift in Sources */,

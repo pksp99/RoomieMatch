@@ -40,10 +40,10 @@ class MessagesViewModel: ObservableObject {
                     let chat = Chat(id: id, names: names, userIds: userIds, groupIds: groupIds, lastUpdated: lastUpdated, messages: messages)
                     self.chats.append(chat)
                 }
-                self.chats.sort(by: {$0.lastUpdated < $1.lastUpdated})
-//                print("Received Chats: \(self.chats.count)")
+                self.chats.sort(by: {$0.lastUpdated > $1.lastUpdated})
+                print("Received Chats: \(self.chats.count)")
                 self.chats = self.chats.filter {$0.userIds.contains(userId)}
-//                print("Filter Chats: \(self.chats.count)")
+                print("Filter Chats: \(self.chats.count)")
             }
         }
     }

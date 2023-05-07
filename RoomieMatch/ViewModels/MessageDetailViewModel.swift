@@ -15,15 +15,17 @@ class MessageDetailViewModel: ObservableObject {
     
     let db = Firestore.firestore()
     
+    // listener to fetch messages from datastore
     func fetchMessages(chatId: String) {
         let docRef = db.collection("chats").document(chatId)
         
         docRef.getDocument { (document, error) in
             if let document = document {
                 docRef.collection("messages").addSnapshotListener { (querySnapshot, error) in
-                    print("Fetching")
+                    
+                    print("Fetching Messages")
                     guard let documents = querySnapshot?.documents else {
-                        print("No documents found")
+                        print("No message documents found")
                         return
                     }
                     
@@ -32,7 +34,7 @@ class MessageDetailViewModel: ObservableObject {
                         let id = data["id"] as! String
                         let text = data["text"] as! String
                         let senderName = data["senderName"] as! String
-                        let senderId = data["senderId"] as! String ?? ""
+                        let senderId = data["senderId"] as! String
                         let timeStamp = data["timeStamp"] as! Timestamp
                         let timeStampDate = timeStamp.dateValue()
                         
@@ -50,6 +52,9 @@ class MessageDetailViewModel: ObservableObject {
         }
         
     }
+    
+    
+    // send message to datastore and update lastUpdated time for respective chat field
     func sendMessage(chatId: String, userName: String, senderId: String) {
         
         let id = UUID().uuidString
@@ -57,11 +62,15 @@ class MessageDetailViewModel: ObservableObject {
         let message = ["text": newMessage, "senderId": senderId, "timeStamp": Date(), "senderName": userName, "id": id] as [String : Any]
         
         let messageRef = messagesRef.document(id)
+        
+        // send message
         messageRef.setData(message) { (error) in
             if let error = error {
                 print("Error sending message: \(error)")
             } else {
                 print("Message sent successfully with ID \(id)")
+                
+                // change the last updated time of the chat after message is sent successfully.
                 self.db.collection("chats").document(chatId).updateData([
                     "lastUpdated": Date()
                 ]) { error in

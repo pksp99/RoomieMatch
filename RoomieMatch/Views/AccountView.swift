@@ -169,6 +169,10 @@ struct AccountView: View {
             }
             .background(Color("BackgroundColor"))
             .scrollContentBackground(.hidden)
+            // close keyboad on tap gesture.
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
             
             // Zstack layer two
             // Save and Cancel Buttons

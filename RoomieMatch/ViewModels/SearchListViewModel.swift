@@ -10,15 +10,18 @@ import Firebase
 
 
 class SearchListViewModel: ObservableObject {
-    
+    // user group displayed, initializing it dummy group so that something might visible if backend server is not running or unable to connect to server
     @Published var userGroups: [UserGroup] = dummyGetUserGroupsResponse.userGroups
     
+    // all likes made by current user.
     @Published var likedGroups: [String] = []
     
     private var getUserGroupsResponse: GetUserGroupsResponse?
     
     let db = Firestore.firestore()
     
+    
+    // get usergroup details from backend.
     func getUserGroups() {
         let url = USERS_ENDPOINT
         //Network call
@@ -39,6 +42,7 @@ class SearchListViewModel: ObservableObject {
         }
     }
     
+    // get liked groups from current user in backend
     func getLikedGroups() {
         let url = LIKE_USER_ENDPOINT
         NetworkRequester.shared.getRequest(url: url, responseType: GroupList.self) { result in
@@ -60,7 +64,7 @@ class SearchListViewModel: ObservableObject {
 
         }
     }
-    
+    // dismiss a group from search view.
     func dismissGroup(group: UserGroup) {
         self.userGroups.removeAll(where: { $0.groupId == group.groupId})
         let url = "\(DISMISS_USER_ENDPOINT)/\(group.groupId)"
@@ -74,6 +78,7 @@ class SearchListViewModel: ObservableObject {
         }
     }
     
+    // like group
     func likeGroup(group: UserGroup) {
         self.likedGroups.append(group.groupId)
         let url = "\(LIKE_USER_ENDPOINT)/\(group.groupId)"
@@ -91,6 +96,7 @@ class SearchListViewModel: ObservableObject {
         }
     }
     
+    // Unlike group
     func unLikeGroup(group: UserGroup) {
         self.likedGroups.removeAll(where: {$0 == group.groupId})
         let url = "\(DISLIKE_USER_ENDPOINT)/\(group.groupId)"
@@ -104,6 +110,7 @@ class SearchListViewModel: ObservableObject {
         }
     }
     
+    // If there is a mutual like between two groups, we add chat for them.
     func addChat(group: LikeResponseGroup) {
         let chatId = getConcatId(groupIds: group.groupIds)
         var chat = Chat(id: chatId, names: group.userNames, userIds: group.userIds, groupIds: group.groupIds, lastUpdated: Date(), messages: [])
@@ -144,6 +151,7 @@ class SearchListViewModel: ObservableObject {
         }
     }
 
+    // concat groupId strings to create a new chatId, this is two make sure no two groups have duplicate chats
     private func getConcatId (groupIds: [String]) -> String {
         let temp = groupIds.sorted()
         var str = ""

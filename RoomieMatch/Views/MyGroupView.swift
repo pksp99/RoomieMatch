@@ -33,8 +33,8 @@ struct MyGroupView: View {
                     }
                 }
             }.onAppear{
-                let url = GET_USER_GROUP
-                NetworkRequester.shared.getRequest(url: url, responseType: UserGroup.self) { result in
+                
+                NetworkRequester.shared.getRequest(url: GET_USER_GROUP, responseType: UserGroup.self) { result in
                     switch result {
                     case .success(let userGroup):
                         self.group = userGroup

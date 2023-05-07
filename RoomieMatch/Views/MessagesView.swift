@@ -17,7 +17,7 @@ struct MessagesView: View {
                 .edgesIgnoringSafeArea(.all)
     
             List(viewModel.chats) { chat in
-                NavigationLink(destination: MessageDetailView(chatId: chat.id)) {
+                NavigationLink(destination: MessageDetailView(chatId: chat.id, chatName: viewModel.getChatName(chat: chat, userName: appState.userName!))) {
                     HStack(alignment: .center) {
                         
                         // Chat profile image

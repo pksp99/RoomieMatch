@@ -168,7 +168,9 @@ class NetworkRequester {
                 if let error = error {
                     print("Unable to get the image: \(error)")
                 }
-                completed(UIImage(data: data!) ?? UIImage(named: "defaultProfile")!)
+                if let data = data {
+                    completed(UIImage(data: data) ?? UIImage(named: "defaultProfile")!)
+                }
             }
         }
         else {

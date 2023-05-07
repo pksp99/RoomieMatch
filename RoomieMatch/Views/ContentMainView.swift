@@ -36,6 +36,11 @@ struct ContentMainView: View {
                     }
             }
             .sheet(isPresented: $showMyGroup) {
+                
+                Button("Dismiss") {
+                    showMyGroup = false
+                }.padding()
+                
                 MyGroupView()
             }
             .navigationBarItems(

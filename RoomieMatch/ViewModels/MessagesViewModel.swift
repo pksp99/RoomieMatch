@@ -12,6 +12,8 @@ class MessagesViewModel: ObservableObject {
     @Published var chats: [Chat] = []
     let db = Firestore.firestore()
     
+    
+    // get all user chats
     func getAllChats(userId: String) {
         db.collection("chats").getDocuments() { (querySnapshot, error) in
             if let error = error {
@@ -48,6 +50,7 @@ class MessagesViewModel: ObservableObject {
         }
     }
     
+    // Generated Chat Name
     func getChatName(chat: Chat, userName: String) -> String {
         var names = chat.names
         // Removing user name from all names, thus chat name will display other persons name
@@ -61,6 +64,9 @@ class MessagesViewModel: ObservableObject {
         return String(nameString.dropLast(2))
     }
     
+    // Generate dynamic chat profile image.
+    // If it is a two person chat, this gives the image name with the initial of other person
+    // Else more then two means, it is group chat, thus gives group symbol.
     func getChatProfileImage(chat: Chat, userName: String) -> String {
         var names = chat.names
         // Removing user name from all names, thus chat name will display other persons name
@@ -77,6 +83,7 @@ class MessagesViewModel: ObservableObject {
         return sysImageName
     }
     
+    // Send a request to backend to create group.
     func makeGroup(group1: String, group2: String) {
         let url = MAKE_GROUP_ENDPOINT
         print("Making group for \(group1) and \(group2)")
@@ -85,6 +92,7 @@ class MessagesViewModel: ObservableObject {
         }
     }
     
+    // Generated last Udpdated time "dynamic string" based on lastUpdated time.
     func getLastUpdatedTimeString(for date: Date) -> String {
         let now = Date()
         let secondsSinceUpdate = Int(now.timeIntervalSince(date))

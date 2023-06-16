@@ -10,6 +10,7 @@ import Firebase
 
 struct ContentMainView: View {
     @EnvironmentObject var appState: AppState
+    @State var showMyGroup = false
     var body: some View {
         NavigationView {
             TabView {
@@ -21,38 +22,35 @@ struct ContentMainView: View {
                         Text("Search")
                     }
         
-                Text("Second View")
+                MessagesView()
                     .tabItem {
                         Image("ic-messages")
                             .renderingMode(.template)
                         Text("Messages")
                     }
-                Text("Third View")
+                AccountView()
                     .tabItem {
                         Image("ic-account")
                             .renderingMode(.template)
                         Text("Accounts")
                     }
             }
+            .sheet(isPresented: $showMyGroup) {
+                
+                Button("Dismiss") {
+                    showMyGroup = false
+                }.padding()
+                
+                MyGroupView()
+            }
             .navigationBarItems(
-                leading:
-                    Menu {
-                        Button(action: {
-                            // TODO
-                        }, label: {
-                            Label("Saved People", systemImage: "star.fill")
-                        })
-                    } label: {
-                        Image(systemName: "line.horizontal.3")
-                            .imageScale(.large)
-                    },
+                
                 trailing:
                     Menu {
                         Button(action: {
-                           //TODO User can change account settings, for example changing passwords.
-                            
+                            self.showMyGroup = true
                         }, label: {
-                            Label("Account Settings", systemImage: "gear")
+                            Label("My Group", systemImage: "person.3")
                         })
                         
                         Button(action: {
@@ -67,6 +65,7 @@ struct ContentMainView: View {
             )
 
         }
+        
 
     }
     func signOut() {
@@ -83,7 +82,7 @@ struct ContentMainView_Previews: PreviewProvider {
     //Just for Preview
     static func getAppState() -> AppState {
         
-        let appState = AppState(isOnboarded: true, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"))
+        let appState = AppState(isOnboarded: true, userId: "123", userName: "Preet Karia", profileImage: UIImage(named: "defaultProfile"), userEmail: "hey@gmail.com")
         return appState
 
     }

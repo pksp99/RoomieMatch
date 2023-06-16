@@ -31,11 +31,13 @@ struct GroupCardsView: View {
                             
                         }
                     }
-                    
                     .padding(20)
+                    
                     .onAppear {
                         scrollView.scrollTo(selectedIndex, anchor: .center)
                     }
+                    
+                    // Improving annimation
                     .background(GeometryReader { proxy in
                         Color.clear.onAppear {
                             scrollView.scrollTo(selectedIndex, anchor: .center)
@@ -47,17 +49,20 @@ struct GroupCardsView: View {
                         }
                         .frame(width: proxy.size.width, height: proxy.size.height)
                     })
+                    
                     Spacer()
                     Spacer()
+                    
                 }
             }
-            
-            
         }
         .onAppear {
+            // scroll to middle card
             selectedIndex = users.count / 2
         }
     }
+    
+    // Get the scale of the card based on the placement in the screen.
     func getScale(geometry: GeometryProxy, index: Int) -> CGFloat {
         let deviceWidth = geometry.size.width
         let cardCenter = geometry.frame(in: .global).midX - 50

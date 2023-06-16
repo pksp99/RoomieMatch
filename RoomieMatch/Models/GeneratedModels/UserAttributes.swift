@@ -11,12 +11,12 @@ import Foundation
 
 public struct UserAttributes: Codable {
 
-    public enum Gender: String, Codable { 
+    public enum Gender: String, Codable, CaseIterable {
         case male = "male"
         case female = "female"
         case other = "other"
     }
-    public enum Major: String, Codable { 
+    public enum Major: String, Codable, CaseIterable {
         case businessAdministration = "Business Administration"
         case computerScience = "Computer Science"
         case psychology = "Psychology"
@@ -38,14 +38,14 @@ public struct UserAttributes: Codable {
         case chemistry = "Chemistry"
         case foreignLanguagesAndLiteratures = "Foreign Languages and Literatures"
     }
-    public enum FoodPreference: String, Codable { 
+    public enum FoodPreference: String, Codable, CaseIterable {
         case vegetarian = "Vegetarian"
         case vegan = "Vegan"
         case jain = "Jain"
         case glutenFree = "Gluten-Free"
         case noPreference = "No Preference"
     }
-    public enum SleepSchedule: String, Codable { 
+    public enum SleepSchedule: String, Codable, CaseIterable { 
         case earlyBird = "early_bird"
         case nightOwl = "night_owl"
         case somewhereInBetween = "somewhere_in_between"

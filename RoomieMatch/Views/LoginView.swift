@@ -14,17 +14,21 @@ struct LoginView: View {
     @State private var password = ""
     @State private var error = ""
     @EnvironmentObject var appState: AppState
+    var accountsViewModel = AccountsViewModel()
+    @Binding var isRegisteredNow: Bool
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack {
+                    // App Logo
                     Image("ig-logo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 120, height: 120)
                         .padding(.bottom, 40)
                     
+                    //Email and Password
                     VStack(spacing: 16) {
                         TextField("Email", text: $email)
                             .autocapitalization(.none)
@@ -44,6 +48,8 @@ struct LoginView: View {
                     }
                     .padding(.horizontal)
                     
+                    
+                    // Login Button
                     Button(action: {
                         login()
                     }) {
@@ -59,8 +65,8 @@ struct LoginView: View {
                     .padding(.vertical)
                     
                     
-                    
-                    NavigationLink(destination: RegisterView().environmentObject(appState))
+                    // Register button for new user.
+                    NavigationLink(destination: RegisterView(isRegisteredNow: $isRegisteredNow).environmentObject(appState))
                     {
                         HStack {
                             Text("Don't have an account?")
@@ -85,14 +91,24 @@ struct LoginView: View {
         }
     }
     
+    // login button action.
     func login() {
+        
+        // Firebase call to sign in
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 self.error = error.localizedDescription
             } else {
+                
+                // setting appState and userId in networkRequestor after logged in.
                 let userId = Auth.auth().currentUser?.uid
                 appState.isOnboarded = true
                 appState.userId = userId
+                NetworkRequester.shared.userId = userId!
+                accountsViewModel.getUserDetail(userId: userId!) { result in
+                    appState.userEmail = result.email
+                    appState.userName = result.userAttributes.name
+                }
                 
             }
         }
@@ -106,11 +122,11 @@ struct LoginView_Previews: PreviewProvider {
     // Just for Preview
     static func getAppState() -> AppState {
         
-        let appState = AppState(isOnboarded: true, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"))
+        let appState = AppState(isOnboarded: true, userId: "123", userName: "John Doe", profileImage: UIImage(named: "defaultProfile"), userEmail: "hey@gmail.com")
         return appState
 
     }
     static var previews: some View {
-        LoginView().environmentObject(getAppState())
+        LoginView(isRegisteredNow: .constant(false)).environmentObject(getAppState())
     }
 }
